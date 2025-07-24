@@ -32,18 +32,18 @@ const menuItems: MenuItem[] = [
 <template>
     <header class="header">
         <div class="logo">Sizeup</div>
-        <div class="menu" @click="toggleTheme">
-            <div v-if="isDark"><font-awesome-icon :icon="['fas', 'sun']" /></div>
-            <div v-else><font-awesome-icon :icon="['fas', 'moon']" /></div>
+        <div class="header-r">
+        <div class="theme" @click="toggleTheme">
+            <div v-if="isDark"><font-awesome-icon :icon="['fas', 'moon']" /></div>
+            <div v-else><font-awesome-icon :icon="['fas', 'sun']" /></div>
         </div>
         <nav class="menu">
-
-
             <button v-for="item in menuItems"
              :key="item.label" @click="item.action">
                 {{  item.label }}
             </button>
         </nav>
+        </div>
     </header>
 </template>
 
@@ -55,6 +55,16 @@ const menuItems: MenuItem[] = [
         padding: 1rem;
         background-color: #2c3e50;
         color: white;
+    }
+    .header-r {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .theme {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
     }
     .menu button {
         margin-left: 1rem;
