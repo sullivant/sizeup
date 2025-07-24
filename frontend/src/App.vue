@@ -20,6 +20,10 @@ import ContentGrid from './components/ContentGrid.vue'
     display: flex;
     flex-direction: column;
     height: 100vh;
+    width: 100vw;
+    margin: 100;
+    padding: 0;
+    overflow: hidden;
 }
 
 </style>
