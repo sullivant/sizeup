@@ -32,10 +32,13 @@ const menuItems: MenuItem[] = [
 <template>
     <header class="header">
         <div class="logo">Sizeup</div>
+        <div class="menu" @click="toggleTheme">
+            <div v-if="isDark"><font-awesome-icon :icon="['fas', 'sun']" /></div>
+            <div v-else><font-awesome-icon :icon="['fas', 'moon']" /></div>
+        </div>
         <nav class="menu">
-            <button @click="toggleTheme">
-                {{  isDark ? 'Light' : 'Dark' }}
-            </button>
+
+
             <button v-for="item in menuItems"
              :key="item.label" @click="item.action">
                 {{  item.label }}
