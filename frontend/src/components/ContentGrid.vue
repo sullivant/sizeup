@@ -3,7 +3,8 @@
 
     import ScenarioItems from '@/components/ScenarioItems.vue'
     import ScenarioEnvironment from '@/components/ScenarioEnvironment.vue';
-    import ApparatusList from './ApparatusList.vue';
+    import ApparatusList from '@/components/ApparatusList.vue';
+    import StreetView from '@/components/StreetView.vue';
 
     import type { MenuItem } from '@/types/MenuItem';
     import type { ScenarioItem } from '@/types/ScenarioItem'
@@ -22,7 +23,7 @@
     <main class="grid-container">
         <div class="row">
             <div class="main-item">
- 
+                <StreetView />
             </div>
             <div class="side-items">
                 <div class="side-item">
@@ -41,7 +42,7 @@
         </div>
         <div class="row">
             <div class="main-item">
-                Main Item. Notes Screen.
+                Notes
             </div>
             <div class="side-items">
                 <div class="side-item">

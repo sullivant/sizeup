@@ -31,8 +31,8 @@ const menuItems: MenuItem[] = [
 
 <template>
     <header class="header">
-        <div class=""><img class="logo" src="@/assets/sizeup-logo.png" alt="Sizeup">
-            <span class="logo-text">Sizeup</span>
+        <div class="">
+            <img class="logo" src="@/assets/sizeup-logo.png" alt="Sizeup">
         </div>
         <div class="header-r">
         <div class="theme" @click="toggleTheme">
