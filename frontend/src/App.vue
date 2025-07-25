@@ -4,14 +4,17 @@
     import ContentGrid from './components/ContentGrid.vue'
 
     import appSettingsData from '@/data/appSettings.json'
-    import type { AppSettings } from './types/AppSettings'
-
     import scenarioData from '@/Data/scenarioToggles.json'
-    import type { ScenarioItem } from '@/types/ScenarioItem'
+    import apparatusData from '@/data/apparatus.json'
 
-    import type { typeScenarioEnvironment } from './types/typeScenarioEnvironment'
+    import type { AppSettings } from '@/types/AppSettings'
+    import type { ScenarioItem } from '@/types/ScenarioItem'
+    import type { ScenarioEnvironment as typeScenarioEnvironment } from './types/typeScenarioEnvironment'
+    import type { Apparatus } from '@/types/Apparatus'
 
     const appSettings = ref<AppSettings>(appSettingsData);
+
+    const apparatus = ref<Apparatus[]>(apparatusData);
 
     // The application's list of scenario features that can be used when discussing
     // response to the incident, etc.  This is stored in the scenarioToggles.json file.
@@ -61,7 +64,7 @@
 <template>
     <div class="app-container">
         <Header />
-        <ContentGrid :scenario-toggles="scenarioToggles" :scenario-environment="scenarioEnvironment" />
+        <ContentGrid :scenario-toggles="scenarioToggles" :scenario-environment="scenarioEnvironment" :apparatus="apparatus" />
     </div>
 </template>
 

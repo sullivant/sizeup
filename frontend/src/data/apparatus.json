@@ -1,0 +1,9 @@
+[
+  { "id": 1, "name": "Truck 11", "enabled": false },
+  { "id": 2, "name": "Engine 2", "enabled": false },
+  { "id": 3, "name": "Squad 5", "enabled": false },
+  { "id": 4, "name": "Engine 3", "enabled": false },
+  { "id": 5, "name": "Engine 14", "enabled": false },
+  { "id": 6, "name": "Tac 8", "enabled": false },
+  { "id": 7, "name": "Medical", "enabled": false }
+]

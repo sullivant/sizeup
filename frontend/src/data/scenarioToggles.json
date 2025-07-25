@@ -14,5 +14,11 @@
   { "id": 13, "name": "Windows dark, smoke puffing eaves", "enabled": false },
   { "id": 14, "name": "Hoarding", "enabled": false },
   { "id": 15, "name": "Multiple victims", "enabled": false },
-  { "id": 16, "name": "Bariatric victim", "enabled": false }
+  { "id": 16, "name": "Bariatric victim", "enabled": false },
+  { "id": 17, "name": "Animal consideration", "enabled": false },
+  { "id": 18, "name": "Construction", "enabled": false },
+  { "id": 19, "name": "Combative victim", "enabled": false },
+  { "id": 20, "name": "Arson evidence", "enabled": false },
+  { "id": 21, "name": "Hydrant disabled", "enabled": false },
+  { "id": 22, "name": "Chemical considerations", "enabled": false }
 ]

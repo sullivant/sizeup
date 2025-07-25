@@ -21,13 +21,11 @@
 </script>
 
 <template>
-    <div class="scrollable-container">
-        <ul>
-            <li v-for="item in sortedScenarioToggles" :key="item.id" @click="toggleScenario(item.id)">
-                <font-awesome-icon :icon="item.enabled ? 'fa-regular fa-square-check' : 'fa-regular fa-square'"  /> {{ item.name }}
-            </li>
-        </ul>
-    </div>
+    <ul>
+        <li v-for="item in sortedScenarioToggles" :key="item.id" @click="toggleScenario(item.id)">
+            <font-awesome-icon :icon="item.enabled ? 'fa-regular fa-square-check' : 'fa-regular fa-square'"  /> {{ item.name }}
+        </li>
+    </ul>
 </template>
 
 <style scoped>
