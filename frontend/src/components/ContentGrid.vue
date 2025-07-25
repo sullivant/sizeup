@@ -1,27 +1,17 @@
 <script setup lang="ts">
-import type { MenuItem } from '@/types/MenuItem';
-import type { ScenarioItem } from '@/types/ScenarioItem'
-import { onMounted } from 'vue';
+    import {ref, defineProps, onMounted } from 'vue';
 
-
-const scenarioToggles: ScenarioItem[] = [
-    { id: 1, name: 'Toggle 1' },
-    { id: 2, name: 'Toggle 2' },
-    { id: 3, name: 'Toggle 1' },
-    { id: 4, name: 'Toggle 1' },
-    { id: 5, name: 'Toggle 1' },
-    { id: 6, name: 'Toggle 1' },
-    { id: 7, name: 'Toggle 1' },
-    { id: 8, name: 'Toggle 1' },
-    { id: 9, name: 'Toggle 1' },
-    { id: 10, name: 'Toggle 1' },
-    { id: 11, name: 'Toggle 1' },
-    { id: 12, name: 'Toggle 1' },
-    { id: 13, name: 'Toggle 1' },
-    { id: 14, name: 'Toggle 1' },
-    { id: 15, name: 'Toggle 1' },
-    { id: 16, name: 'Toggle 1' },
-]
+    import ScenarioItems from '@/components/ScenarioItems.vue'
+    import ScenarioEnvironment from '@/components/ScenarioEnvironment.vue';
+    
+    import type { MenuItem } from '@/types/MenuItem';
+    import type { ScenarioItem } from '@/types/ScenarioItem'
+    import type { typeScenarioEnvironment } from '@/types/typeScenarioEnvironment';
+    
+    const props = defineProps<{
+        scenarioToggles: ScenarioItem[]
+        scenarioEnvironment: typeScenarioEnvironment
+    }>();
 
 </script>
 
@@ -32,15 +22,11 @@ const scenarioToggles: ScenarioItem[] = [
                 Main Item.  Map View.
             </div>
             <div class="side-items">
-                <div class="side-item">Side Item 1A - Scenarios</div>
                 <div class="side-item">
-                    <div class="scrollable-container">
-                        <ul>
-                            <li v-for="item in scenarioToggles" :key="item.id">
-                                {{ item.name }}
-                            </li>
-                        </ul>
-                    </div>
+                    <ScenarioEnvironment :scenario-environment="scenarioEnvironment"/>
+                </div>
+                <div class="side-item">
+                    <ScenarioItems :scenario-toggles="scenarioToggles"/>
                 </div>
             </div>
         </div>
@@ -49,16 +35,8 @@ const scenarioToggles: ScenarioItem[] = [
                 Main Item. Notes Screen.
             </div>
             <div class="side-items">
-                <div class="side-item">Side Item 2A - Links</div>
-                <div class="side-item">
-                    <div class="scrollable-container">
-                        <ul>
-                            <li v-for="item in scenarioToggles" :key="item.id">
-                                {{ item.name }}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="side-item">Side Item 2A - Apparatus </div>
+                <div class="side-item">Side Item 2B - Icons </div>
             </div>
         </div>
     </main>
@@ -110,12 +88,6 @@ const scenarioToggles: ScenarioItem[] = [
         height: 50%;
     }
 
-    .scrollable-container {
-        flex: 1;
-        overflow-y: auto;
-        border: 1px solid #ccc;
-        padding: 1px;
-    }
 
     .list-item {
         padding: 8px;

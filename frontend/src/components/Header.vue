@@ -9,7 +9,7 @@ const toggleTheme = () => {
 }
 
 onMounted(() => {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches 
+    const prefersDark = window.matchMedia('(prefers-color-scheme: light)').matches 
     isDark.value = prefersDark
 
     document.documentElement.classList.toggle('dark',isDark.value)

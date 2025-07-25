@@ -1,0 +1,18 @@
+[
+  { "id": 1, "name": "Smell of smoke", "enabled": true },
+  { "id": 2, "name": "Smoke showing", "enabled": false },
+  { "id": 3, "name": "Alarm sounding", "enabled": false },
+  { "id": 4, "name": "Doors locked", "enabled": false },
+  { "id": 5, "name": "Nonambulatory occupant", "enabled": false },
+  { "id": 6, "name": "Vehicle fire near structure", "enabled": false },
+  { "id": 7, "name": "Basement fire", "enabled": false },
+  { "id": 8, "name": "Carbon Monoxide", "enabled": false },
+  { "id": 9, "name": "Waterflow alarm", "enabled": false },
+  { "id": 10, "name": "Kitchen fire", "enabled": false },
+  { "id": 11, "name": "Attic fire", "enabled": false },
+  { "id": 12, "name": "Brush fire near structure", "enabled": false },
+  { "id": 13, "name": "Windows dark, smoke puffing eaves", "enabled": false },
+  { "id": 14, "name": "Hoarding", "enabled": false },
+  { "id": 15, "name": "Multiple victims", "enabled": false },
+  { "id": 16, "name": "Bariatric victim", "enabled": false }
+]
