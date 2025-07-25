@@ -1,13 +1,9 @@
 <script setup lang="ts">
     import {ref, defineProps, onMounted } from 'vue';
 
-    import { MotionDirective as motion } from '@vueuse/motion'
-
     import ScenarioItems from '@/components/ScenarioItems.vue'
     import ScenarioEnvironment from '@/components/ScenarioEnvironment.vue';
     import ApparatusList from './ApparatusList.vue';
-    import IconList from '@/components/IconList.vue';
-
 
     import type { MenuItem } from '@/types/MenuItem';
     import type { ScenarioItem } from '@/types/ScenarioItem'
@@ -20,51 +16,13 @@
         apparatus: Apparatus[]
     }>();
 
-
-
-    type DroppedIcon = {
-        id: number;
-        name: string;
-        x: number;
-        y: number;
-    };
-
-    const droppedIcons = ref<DroppedIcon[]>([]);
-
-    function handleIconDrop(icon: { id: number; name: string }) {
-    droppedIcons.value.push({ ...icon, x: 10, y: 10 });
-    }
-
-    function updatePosition(index: number, x: number, y: number) {
-    droppedIcons.value[index].x = x;
-    droppedIcons.value[index].y = y;
-    }
-
-
-
-
-
 </script>
 
 <template>
     <main class="grid-container">
         <div class="row">
             <div class="main-item">
-                <div id="street-view" class="street-view">
-                    <Motion
-                        v-for="(icon, index) in droppedIcons"
-                        :key="icon.id + '-' + index"
-                        class="draggable-icon"
-                        :initial="{ x: icon.x, y: icon.y }"
-                        :drag="true"
-                        dragConstraints="#street-view"
-                        @drag-end="(e: { x: number; y: number }) => updatePosition(index, e.x, e.y)"
-                    >
-                        <font-awesome-icon :icon="icon.name" />
-                    </Motion>
-                    </div>
-
-
+ 
             </div>
             <div class="side-items">
                 <div class="side-item">
@@ -94,9 +52,7 @@
                 </div>
                 <div class="side-item">
                     <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/>Icons</div>
-                    <div class="scrollable-container" id="icon-list">
-                        <IconList @icon-dropped="handleIconDrop" />
-                    </div>
+                    list here
                 </div>
 
             </div>

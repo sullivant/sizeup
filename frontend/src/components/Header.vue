@@ -31,7 +31,9 @@ const menuItems: MenuItem[] = [
 
 <template>
     <header class="header">
-        <div class="logo">Sizeup</div>
+        <div class=""><img class="logo" src="@/assets/sizeup-logo.png" alt="Sizeup">
+            <span class="logo-text">Sizeup</span>
+        </div>
         <div class="header-r">
         <div class="theme" @click="toggleTheme">
             <div v-if="isDark"><font-awesome-icon :icon="['fas', 'moon']" /></div>
@@ -48,6 +50,13 @@ const menuItems: MenuItem[] = [
 </template>
 
 <style scoped>
+    .logo {
+        height: 40px;
+    }
+    .logo-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
     .header {
         display: flex;
         justify-content: space-between;
