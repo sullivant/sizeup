@@ -5,7 +5,7 @@
     const streetViewContainer = ref<HTMLDivElement | null>(null)
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
     // Hardcoded ZIP code to pick a random spot in
-    const ZIP = '10001' // NYC Midtown
+    const ZIP = '06098' 
 
     type LatLng = { lat: number; lng: number }
 
