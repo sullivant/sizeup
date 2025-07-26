@@ -5,12 +5,22 @@
     import ScenarioEnvironment from '@/components/ScenarioEnvironment.vue';
     import ApparatusList from '@/components/ApparatusList.vue';
     import StreetView from '@/components/StreetView.vue';
+    import MapView from '@/components/MapView.vue';
 
     import type { MenuItem } from '@/types/MenuItem';
     import type { ScenarioItem } from '@/types/ScenarioItem'
     import type { ScenarioEnvironment as typeScenarioEnvironment } from '@/types/typeScenarioEnvironment';
     import type { Apparatus } from '@/types/Apparatus';
     
+    const chosenAddress = ref('')
+    const chosenLatLng = ref<{ lat: number; lng: number } | null>(null)
+
+
+    function handleLocationChosen(payload: { lat: number; lng: number; address: string }) {
+        chosenAddress.value = payload.address
+        chosenLatLng.value = { lat: payload.lat, lng: payload.lng }
+    }
+
     const props = defineProps<{
         scenarioToggles: ScenarioItem[]
         scenarioEnvironment: typeScenarioEnvironment
@@ -23,7 +33,7 @@
     <main class="grid-container">
         <div class="row">
             <div class="main-item">
-                <StreetView />
+                <StreetView @locationChosen="handleLocationChosen"/>
             </div>
             <div class="side-items">
                 <div class="side-item">
@@ -31,6 +41,7 @@
                     <div class="scrollable-container">
                         <ScenarioEnvironment :scenario-environment="scenarioEnvironment"/>
                     </div>
+                    <div class="side-header"><p v-if="chosenAddress">{{ chosenAddress }}</p></div>
                 </div>
                 <div class="side-item">
                     <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/>Features</div>
@@ -42,7 +53,9 @@
         </div>
         <div class="row">
             <div class="main-item">
-                Notes
+                <!-- <MapView v-if="chosenLatLng" :center="chosenLatLng" /> -->
+                <MapView  v-if="chosenLatLng"  :lat="chosenLatLng.lat" :lng="chosenLatLng.lng" :address="chosenAddress" />
+
             </div>
             <div class="side-items">
                 <div class="side-item">

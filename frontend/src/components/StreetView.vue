@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import { onMounted, ref } from 'vue'
+    import { defineEmits } from 'vue'
 
     const streetViewContainer = ref<HTMLDivElement | null>(null)
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
@@ -8,6 +9,9 @@
 
     type LatLng = { lat: number; lng: number }
 
+    const emit = defineEmits<{
+        (e: 'locationChosen', payload: { lat: number; lng: number; address: string }): void
+    }>()
 
     async function loadGoogleMapsApi(): Promise<void> {
         return new Promise((resolve, reject) => {
@@ -24,6 +28,26 @@
             document.head.appendChild(script)
         })
     }
+
+    function reverseGeocode(lat: number, lng: number): Promise<string> {
+        return new Promise((resolve, reject) => {
+            if (!window.google || !window.google.maps) {
+                reject(new Error('Google Maps API is not loaded'))
+                return
+            }
+            const geocoder = new google.maps.Geocoder()
+            const latlng = new google.maps.LatLng(lat, lng)
+            geocoder.geocode({ location: latlng }, (results, status) => {
+            if (status === 'OK' && results && results[0]) {
+                resolve(results[0].formatted_address)
+            } else {
+                console.warn('Geocoder failed due to:', status)
+                resolve('Unknown address')
+            }
+            })
+        })
+    }
+
 
     // Fetch bounding box (viewport or bounds) for ZIP
     async function getZipBounds(zip: string): Promise<{ northeast: LatLng; southwest: LatLng }> {
@@ -88,6 +112,11 @@
             // const bounds = await getZipBounds(ZIP)
             // const randomPoint = getRandomLatLng(bounds)
             const point = await getValidStreetViewLocation(ZIP)
+
+            // Emit the address so we can use it elsewhere.
+            const address = await reverseGeocode(point.lat, point.lng)
+            emit('locationChosen', { lat: point.lat, lng: point.lng, address })
+
 
             if (streetViewContainer.value) {
             new google.maps.StreetViewPanorama(streetViewContainer.value, {
