@@ -31,8 +31,9 @@ const menuItems: MenuItem[] = [
 
 <template>
     <header class="header">
-        <div class="">
-            <img class="logo" src="@/assets/sizeup-logo.png" alt="Sizeup">
+        <div class="header-left">
+            <img class="logo" src="@/assets/sizeup-logo.png" alt="Sizeup" />
+            <span class="logo-text">Sizeup</span>
         </div>
         <div class="header-r">
         <div class="theme" @click="toggleTheme">
@@ -51,31 +52,44 @@ const menuItems: MenuItem[] = [
 
 <style scoped>
     .logo {
-        height: 40px;
+        height: 60px;
+        margin-right: 0.5rem;
     }
+
     .logo-text {
         font-size: 1.5rem;
         font-weight: bold;
     }
+
     .header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem;
+        padding: 0rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
         background-color: #2c3e50;
         color: white;
     }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+    }
+
     .header-r {
         display: flex;
-        justify-content: space-between;
         align-items: center;
     }
+
     .theme {
         display: flex;
-        justify-content: flex-end;
         align-items: center;
+        margin-right: 1rem;
     }
+
     .menu button {
         margin-left: 1rem;
     }
+
 </style>

@@ -127,7 +127,7 @@
         padding: 0.5rem 1rem;
         font-weight: bold;
         border-bottom: 1px solid #ddd;
-        background-color: var(--color-header-background, #f5f5f5);
+        background-color: var(--color-background);
         flex-shrink: 0;
     }
 
