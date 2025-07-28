@@ -48,6 +48,15 @@ const removeClone = (index: number) => {
     clones.splice(index, 1);
 };
 
+const startCloneDrag = (index: number, event: MouseEvent) => {
+    draggingCloneIndex.value = index;
+    clones[index].x = event.clientX;
+    clones[index].y = event.clientY;
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', stopDrag);
+};
+
 </script>
 
 <template>
@@ -60,7 +69,7 @@ const removeClone = (index: number) => {
             v-for="(clone, index) in clones" :key="clone.id" class="icon-clone"
             :style="{ top: clone.y + 'px', left: clone.x + 'px' }"
             @contextmenu.prevent="removeClone(index)"
-            @mousedown.left="() => { draggingCloneIndex = index }">
+            @mousedown.left="(event) => startCloneDrag(index, event)">
             <font-awesome-icon :icon="[clone.icon.icon.type, clone.icon.icon.name]" size="2x" />
         </div>
     </div>
