@@ -1,7 +1,7 @@
 import './assets/main.css'
 
 import { createApp } from 'vue'
-import { MotionPlugin } from '@vueuse/motion';
+// import { MotionPlugin } from '@vueuse/motion';
 
 import App from './App.vue'
 
@@ -26,6 +26,6 @@ library.add(faSun, farSun, faMoon, faSquare, faSquareCheck, faSnowflake,
 
 // Create the app and include the font awesome component stuff
 createApp(App)
-    .use(MotionPlugin)
+    // .use(MotionPlugin)
     .component('font-awesome-icon', FontAwesomeIcon)
     .mount('#app')
