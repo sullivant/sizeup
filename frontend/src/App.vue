@@ -4,7 +4,7 @@
     import ContentGrid from './components/ContentGrid.vue'
 
     import appSettingsData from '@/data/appSettings.json'
-    import scenarioData from '@/Data/scenarioToggles.json'
+    import scenarioData from '@/data/scenarioToggles.json'
     import apparatusData from '@/data/apparatus.json'
 
     import type { AppSettings } from '@/types/AppSettings'
