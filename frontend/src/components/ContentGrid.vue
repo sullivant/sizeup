@@ -153,28 +153,25 @@
         .side-items {
             display: flex;
             flex-direction: column;
+            height: auto;
         }
-        
+        .side-header {
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+            background-color: var(--color-background);
+            flex-shrink: 0;
+            font-size: x-small;
+        }        
+        .main-item {
+            border: 1px solid #ccc;
+            display: flex;
+            flex-direction: column;
+            height: 100%;;
+        }
     }
 
 
-
-.street-view {
-  position: relative;
-  min-height: 400px;
-  min-width: 100%;
-  border: 2px dashed #888;
-  background-color: #eef;
-  padding: 1rem;
-  overflow: hidden;
-}
-
-.draggable-icon {
-  position: absolute;
-  font-size: 2rem;
-  cursor: grab;
-  user-select: none;
-}
 
 
 

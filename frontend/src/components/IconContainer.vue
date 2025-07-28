@@ -69,7 +69,7 @@ const startCloneDrag = (index: number, event: MouseEvent) => {
             v-for="(clone, index) in clones" :key="clone.id" class="icon-clone"
             :style="{ top: clone.y + 'px', left: clone.x + 'px' }"
             @contextmenu.prevent="removeClone(index)"
-            @mousedown.left="(event) => startCloneDrag(index, event)">
+            @mousedown.left="(event: any) => startCloneDrag(index, event)">
             <font-awesome-icon :icon="[clone.icon.icon.type, clone.icon.icon.name]" size="2x" />
         </div>
     </div>
@@ -106,6 +106,16 @@ const startCloneDrag = (index: number, event: MouseEvent) => {
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         user-select: none;
         color: rgb(174, 106, 106);
+    }
+
+    @media (max-width: 768px) {
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 400px;
+            margin: auto;
+        }
     }
 
 </style>
