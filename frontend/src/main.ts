@@ -12,7 +12,7 @@ import { faSun, faMoon, faCloudShowersHeavy, faCloudBolt, faSmog, faBed,
 } from '@fortawesome/free-solid-svg-icons';
 import { faSun as farSun, faSquare, faSquareCheck, faSnowflake, faAlarmClock, 
     faCalendarDays, faTruck, faRectangleList, faLifeRing, 
-    faCloud, faLightbulb
+    faCloud, faLightbulb, faMap
 } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -21,7 +21,7 @@ library.add(faSun, farSun, faMoon, faSquare, faSquareCheck, faSnowflake,
     faCalendarDays, faTruck, fasTruck, faRectangleList, faLifeRing, 
     faFire, faCar, faRoadBarrier, faCloud, faFireExtinguisher, faPerson,
     faWater, faExclamation, faLightbulb, faBoltLightning, faMapPin,
-    faTornado
+    faTornado, faMap
 );
 
 // Create the app and include the font awesome component stuff

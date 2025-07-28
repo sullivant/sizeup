@@ -36,17 +36,27 @@
                 <StreetView @locationChosen="handleLocationChosen"/>
             </div>
             <div class="side-items">
-                <div class="side-item">
-                    <div class="side-header"><font-awesome-icon :icon='"far fa-life-ring"'/>Conditions</div>
+                <div class="side-item side-item-short">
+                    <div class="side-header"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
                     <div class="scrollable-container">
                         <ScenarioEnvironment :scenario-environment="scenarioEnvironment"/>
                     </div>
-                    <div class="side-header"><p v-if="chosenAddress">{{ chosenAddress }}</p></div>
                 </div>
-                <div class="side-item">
-                    <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/>Features</div>
-                    <div class="scrollable-container">
-                        <ScenarioItems :scenario-toggles="scenarioToggles"/>
+
+                <div class="side-items">
+                    <div class="side-by-side">
+                        <div class="side-item">
+                            <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Features</div>
+                            <div class="scrollable-container">
+                                <ScenarioItems :scenario-toggles="scenarioToggles"/>
+                            </div>
+                        </div>
+                        <div class="side-item">
+                            <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/> Apparatus</div>
+                            <div class="scrollable-container">
+                                <ApparatusList :apparatus="apparatus"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,12 +68,7 @@
 
             </div>
             <div class="side-items">
-                <div class="side-item">
-                    <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/>Apparatus</div>
-                    <div class="scrollable-container">
-                        <ApparatusList :apparatus="apparatus"/>
-                    </div>
-                </div>
+
                 <div class="side-item">
                     <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/>Icons</div>
                     <div class="scrollable-container">
@@ -124,6 +129,10 @@
         border: 1px solid #ccc;
     }
 
+    .side-item-short {
+        height: 50%;
+    }
+
     .side-header {
         padding: 0.5rem 1rem;
         font-weight: bold;
@@ -144,6 +153,19 @@
         padding-left: 1em;
     }
 
+    .side-by-side {
+        display: flex;
+        gap: 1rem;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .side-by-side .side-item {
+        flex: 1;
+        height: 100%;
+    }
+
+
     @media (max-width: 768px) {
         .row {
             display: flex;
@@ -153,6 +175,9 @@
         .side-items {
             display: flex;
             flex-direction: column;
+            height: auto;
+        }
+        .side-item {
             height: auto;
         }
         .side-header {
