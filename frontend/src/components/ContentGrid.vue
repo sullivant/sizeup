@@ -8,7 +8,6 @@
     import MapView from '@/components/MapView.vue';
     import IconContainer from '@/components/IconContainer.vue';
 
-    import type { MenuItem } from '@/types/MenuItem';
     import type { ScenarioItem } from '@/types/ScenarioItem'
     import type { ScenarioEnvironment as typeScenarioEnvironment } from '@/types/typeScenarioEnvironment';
     import type { Apparatus } from '@/types/Apparatus';
