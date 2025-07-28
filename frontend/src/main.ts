@@ -6,17 +6,15 @@ import { MotionPlugin } from '@vueuse/motion';
 import App from './App.vue'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-
 import { faSun, faMoon, faCloudShowersHeavy, faCloudBolt, faSmog, faBed,
     faFire, faTruck as fasTruck, faCar, faRoadBarrier, faFireExtinguisher,
     faPerson, faWater, faExclamation, faBoltLightning, faMapPin, faTornado
 } from '@fortawesome/free-solid-svg-icons';
-
 import { faSun as farSun, faSquare, faSquareCheck, faSnowflake, faAlarmClock, 
     faCalendarDays, faTruck, faRectangleList, faLifeRing, 
     faCloud, faLightbulb
 } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faSun, farSun, faMoon, faSquare, faSquareCheck, faSnowflake, 
     faCloudBolt, faSmog, faCloudShowersHeavy, faAlarmClock, faBed, 
