@@ -6,6 +6,7 @@
     import ApparatusList from '@/components/ApparatusList.vue';
     import StreetView from '@/components/StreetView.vue';
     import MapView from '@/components/MapView.vue';
+    import IconContainer from '@/components/IconContainer.vue';
 
     import type { MenuItem } from '@/types/MenuItem';
     import type { ScenarioItem } from '@/types/ScenarioItem'
@@ -66,9 +67,10 @@
                 </div>
                 <div class="side-item">
                     <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/>Icons</div>
-                    list here
+                    <div class="scrollable-container">
+                        <IconContainer />
+                    </div>
                 </div>
-
             </div>
         </div>
     </main>
