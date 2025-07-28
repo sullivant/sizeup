@@ -133,5 +133,5 @@
   
 
 <template>
-    <div ref="streetViewContainer" style="width: 100%; height: 500px;"></div>
+    <div ref="streetViewContainer" style="width: 100%; height: 100%;"></div>
 </template>

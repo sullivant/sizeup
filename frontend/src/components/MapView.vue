@@ -43,5 +43,5 @@
 </script>
 
 <template>
-  <div ref="mapEl" style="width: 100%; height: 500px" />
+  <div ref="mapEl" style="width: 100%; height: 100%" />
 </template>
