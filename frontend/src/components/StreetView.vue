@@ -133,5 +133,37 @@
   
 
 <template>
-    <div ref="streetViewContainer" style="width: 100%; height: 100%;"></div>
+    <div class="streetview-wrapper">
+        <div ref="streetViewContainer" class="streetview-content"></div>
+        <div class="streetview-overlay"></div>
+    </div>
 </template>
+
+<style scoped>
+    .streetview-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .streetview-content {
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+    .streetview-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        z-index: 10; 
+    }
+    .icon-clone {
+        z-index: 20; 
+    }
+
+
+
+</style>

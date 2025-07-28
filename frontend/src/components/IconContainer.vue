@@ -105,6 +105,7 @@ const startCloneDrag = (index: number, event: MouseEvent) => {
         border-radius: 8px;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         user-select: none;
+        color: rgb(174, 106, 106);
     }
 
 </style>
