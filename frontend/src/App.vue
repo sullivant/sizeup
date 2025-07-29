@@ -95,7 +95,7 @@
 <template>
     <div class="app-container">
         <Header :key="settingsVersion" :settings="appSettings" @update-settings="handleChangeToSettings" :settings-version="settingsVersion"/>
-        <ContentGrid :scenario-toggles="scenarioToggles" :scenario-environment="scenarioEnvironment" :apparatus="apparatus" />
+        <ContentGrid :settings="appSettings" :scenario-toggles="scenarioToggles" :scenario-environment="scenarioEnvironment" :apparatus="apparatus" />
     </div>
 </template>
 

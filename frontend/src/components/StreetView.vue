@@ -1,6 +1,12 @@
 <script setup lang="ts">
+    import type { AppSettings } from '@/types/AppSettings'
     import { onMounted, ref } from 'vue'
     import { defineEmits } from 'vue'
+
+    const props = defineProps<{
+        settings: AppSettings
+    }>();
+
 
     const streetViewContainer = ref<HTMLDivElement | null>(null)
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
@@ -48,33 +54,6 @@
         })
     }
 
-
-    // Fetch bounding box (viewport or bounds) for ZIP
-    async function getZipBounds(zip: string): Promise<{ northeast: LatLng; southwest: LatLng }> {
-        const url = `https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:${zip}|country:US&key=${apiKey}`
-        try {
-            const res = await fetch(url)
-            const data = await res.json()
-
-            const result = data.results?.[0]
-            const bounds = result?.geometry?.bounds || result?.geometry?.viewport
-
-            if (bounds) {
-            return bounds
-            } else {
-                console.warn(`No bounds found for ZIP ${zip}, defaulting to manual bounds.`)
-            }
-        } catch (err) {
-            console.error('Error fetching ZIP bounds:', err)
-        }
-
-        // Local bounding box fallback
-        return {
-            northeast: { lat: 41.9267214, lng: -73.0758478 },
-            southwest: { lat: 41.9087362, lng: -73.0943926 },
-        }
-    }
-
     async function isStreetViewAvailable(lat: number, lng: number): Promise<boolean> {
         const url = `https://maps.googleapis.com/maps/api/streetview/metadata?location=${lat},${lng}&key=${apiKey}`
         const res = await fetch(url)
@@ -90,28 +69,37 @@
         return { lat, lng }
     }
 
-    async function getValidStreetViewLocation(zip: string, maxTries = 10): Promise<LatLng> {
-        const bounds = await getZipBounds(zip)
+    async function getValidStreetViewLocationFromBounds(
+        bounds: { northeast: LatLng; southwest: LatLng },
+        maxTries = 10
+    ): Promise<LatLng> {
+
         for (let i = 0; i < maxTries; i++) {
-            const point = getRandomLatLng(bounds)
+            const point = getRandomLatLng(bounds);
             if (await isStreetViewAvailable(point.lat, point.lng)) {
-            return point
+            return point;
             }
         }
+
         // fallback coordinate if no valid point found
         return {
             lat: 40.758, // Times Square fallback
             lng: -73.9855,
-        }
+        };
     }
+
 
     onMounted(async () => {
         try {
             await loadGoogleMapsApi()
 
+
+            const bounds = props.settings.location;
+            const point = await getValidStreetViewLocationFromBounds(bounds);
+
             // const bounds = await getZipBounds(ZIP)
             // const randomPoint = getRandomLatLng(bounds)
-            const point = await getValidStreetViewLocation(ZIP)
+            // const point = await getValidStreetViewLocation(ZIP)
 
             // Emit the address so we can use it elsewhere.
             const address = await reverseGeocode(point.lat, point.lng)

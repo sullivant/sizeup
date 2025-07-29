@@ -11,6 +11,7 @@
     import type { ScenarioItem } from '@/types/ScenarioItem'
     import type { ScenarioEnvironment as typeScenarioEnvironment } from '@/types/typeScenarioEnvironment';
     import type { Apparatus } from '@/types/Apparatus';
+    import type { AppSettings } from '@/types/AppSettings';
     
     const chosenAddress = ref('')
     const chosenLatLng = ref<{ lat: number; lng: number } | null>(null)
@@ -25,6 +26,7 @@
         scenarioToggles: ScenarioItem[]
         scenarioEnvironment: typeScenarioEnvironment
         apparatus: Apparatus[]
+        settings: AppSettings
     }>();
 
 </script>
@@ -33,7 +35,7 @@
     <main class="grid-container">
         <div class="row">
             <div class="main-item">
-                <StreetView @locationChosen="handleLocationChosen"/>
+                <StreetView :settings="props.settings"  @locationChosen="handleLocationChosen"/>
             </div>
             <div class="side-items">
                 <div class="side-item side-item-short">
