@@ -13,63 +13,27 @@ interface Clone {
     y: number;
 }
 
-const clones = reactive<Clone[]>([]);
-let cloneId = 0;
-const draggingCloneIndex = ref<number | null>(null);
+const props = defineProps<{
+    clones: Clone[],
+    onStartClone: (icon: DraggableIcon, event: MouseEvent) => void;
+    onStartCloneDrag: (index: number, event: MouseEvent) => void;
+    onRemoveClone: (index: number) => void;
+}>();
 
-const startClone = (icon: DraggableIcon, event: MouseEvent) => {
-    const newClone: Clone = {
-        id: cloneId++,
-        icon,
-        x: event.clientX,
-        y: event.clientY,
-    };
-    clones.push(newClone);
-    draggingCloneIndex.value = clones.length -1;
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', stopDrag);
-};
-
-const onMouseMove = (event: MouseEvent) => {
-    if (draggingCloneIndex.value !== null) {
-        clones[draggingCloneIndex.value].x = event.clientX;
-        clones[draggingCloneIndex.value].y = event.clientY;
-    }
-};
-
-const stopDrag = () => {
-    draggingCloneIndex.value = null;
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', stopDrag);
-}
-
-const removeClone = (index: number) => {
-    clones.splice(index, 1);
-};
-
-const startCloneDrag = (index: number, event: MouseEvent) => {
-    draggingCloneIndex.value = index;
-    clones[index].x = event.clientX;
-    clones[index].y = event.clientY;
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', stopDrag);
-};
 
 </script>
 
 <template>
     <div class="icon-grid">
-        <div v-for="icon in icons" :key="icon.id" class="icon-cell" @mousedown.left="startClone(icon, $event)">
+        <div v-for="icon in icons" :key="icon.id" class="icon-cell" @mousedown.left="onStartClone(icon, $event)">
             <font-awesome-icon :icon="[icon.icon.type, icon.icon.name]" size="2x"/>
         </div>
 
         <div
             v-for="(clone, index) in clones" :key="clone.id" class="icon-clone"
             :style="{ top: clone.y + 'px', left: clone.x + 'px' }"
-            @contextmenu.prevent="removeClone(index)"
-            @mousedown.left="(event: any) => startCloneDrag(index, event)">
+            @contextmenu.prevent="onRemoveClone(index)"
+            @mousedown.left="(event: any) => onStartCloneDrag(index, event)">
             <font-awesome-icon :icon="[clone.icon.icon.type, clone.icon.icon.name]" size="2x" />
         </div>
     </div>

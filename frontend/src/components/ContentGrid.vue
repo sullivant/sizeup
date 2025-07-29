@@ -6,7 +6,7 @@
     import ApparatusList from '@/components/ApparatusList.vue';
     import StreetView from '@/components/StreetView.vue';
     import MapView from '@/components/MapView.vue';
-    import IconContainer from '@/components/IconContainer.vue';
+    import IconTabs from '@/components/IconTabs.vue';
 
     import type { ScenarioItem } from '@/types/ScenarioItem'
     import type { ScenarioEnvironment as typeScenarioEnvironment } from '@/types/typeScenarioEnvironment';
@@ -37,25 +37,23 @@
             </div>
             <div class="side-items">
                 <div class="side-item side-item-short">
-                    <div class="side-header"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
                     <div class="scrollable-container">
-                        <ScenarioEnvironment :scenario-environment="scenarioEnvironment"/>
+                    <div class="side-header"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
+                    <ScenarioEnvironment :scenario-environment="scenarioEnvironment"/>
                     </div>
                 </div>
 
-                <div class="side-items">
-                    <div class="side-by-side">
-                        <div class="side-item">
-                            <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Features</div>
-                            <div class="scrollable-container">
-                                <ScenarioItems :scenario-toggles="scenarioToggles"/>
-                            </div>
+                <div class="side-by-side">
+                    <div class="side-item">
+                        <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Features</div>
+                        <div class="scrollable-container">
+                            <ScenarioItems :scenario-toggles="scenarioToggles"/>
                         </div>
-                        <div class="side-item">
-                            <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/> Apparatus</div>
-                            <div class="scrollable-container">
-                                <ApparatusList :apparatus="apparatus"/>
-                            </div>
+                    </div>
+                    <div class="side-item">
+                        <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/> Apparatus</div>
+                        <div class="scrollable-container">
+                            <ApparatusList :apparatus="apparatus"/>
                         </div>
                     </div>
                 </div>
@@ -70,9 +68,8 @@
             <div class="side-items">
 
                 <div class="side-item">
-                    <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/>Icons</div>
                     <div class="scrollable-container">
-                        <IconContainer />
+                        <IconTabs />
                     </div>
                 </div>
             </div>
@@ -179,6 +176,13 @@
         }
         .side-item {
             height: auto;
+            min-height: 30%;
+        }
+        .side-item-short {
+            height: auto;
+        }
+        .side-by-side {
+            flex-direction: column;
         }
         .side-header {
             padding: 0.5rem 1rem;
@@ -186,7 +190,7 @@
             border-bottom: 1px solid #ddd;
             background-color: var(--color-background);
             flex-shrink: 0;
-            font-size: x-small;
+            font-size: small;
         }        
         .main-item {
             border: 1px solid #ccc;
