@@ -12,7 +12,32 @@
     import type { ScenarioEnvironment as typeScenarioEnvironment } from './types/typeScenarioEnvironment'
     import type { Apparatus } from '@/types/Apparatus'
 
+
+
+    const handleChangeToSettings = (settings: AppSettings) => {
+        saveSettingsToSession(settings);
+        scenarioToggles.value = randomlyEnable(scenarioData);
+    }
+
+    // Save settings to session storage.
+    const saveSettingsToSession = (settings: AppSettings) => {
+        sessionStorage.setItem('appSettings', JSON.stringify(settings));
+        appSettings.value = loadSettingsFromSession();
+    };
+
+    // Load the settings from the session storage, or if unable to, the defaults from the data.
+    const loadSettingsFromSession = (): AppSettings => {
+        let prev = settingsVersion.value | 0;
+        const stored = sessionStorage.getItem('appSettings');
+        const appStored = stored ? JSON.parse(stored) as AppSettings : appSettingsData;
+        settingsVersion.value = prev + 1;
+        return appStored;
+    };
+
+    // App settings are passed as props down to various other components, so we load them here
+    // within App.vue so we can ensure all components have the same values.
     const appSettings = ref<AppSettings>(appSettingsData);
+    const settingsVersion = ref(0);
 
     const apparatus = ref<Apparatus[]>(apparatusData);
 
@@ -38,7 +63,6 @@
     }
 
     function generateRandomEnvironment(): typeScenarioEnvironment {
-    
         const times: typeScenarioEnvironment['timeOfDay'][] = ['Morning', 'Afternoon', 'Evening', 'Night']
         const weathers: typeScenarioEnvironment['weather'][] = ['Clear', 'Rain', 'Snow', 'Fog',  'Storm']
         const temperature = Math.floor(Math.random() * 60) + 30 // 20F to 90F
@@ -56,16 +80,22 @@
     }
 
     onMounted(() => {
+        let storedSettings = loadSettingsFromSession();
+        if (storedSettings) {
+            appSettings.value = storedSettings;
+        } else {
+            appSettings.value = appSettingsData; // The default.
+        }
+
         scenarioToggles.value = randomlyEnable(scenarioData);
-        // scenarioEnvironment.value = generateRandomEnvironment();
+
     })
 </script>
 
 <template>
     <div class="app-container">
-        <Header :settings="appSettings" />
+        <Header :key="settingsVersion" :settings="appSettings" @update-settings="handleChangeToSettings" :settings-version="settingsVersion"/>
         <ContentGrid :scenario-toggles="scenarioToggles" :scenario-environment="scenarioEnvironment" :apparatus="apparatus" />
-
     </div>
 </template>
 

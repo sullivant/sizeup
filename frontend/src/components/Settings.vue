@@ -1,13 +1,21 @@
 <script setup lang="ts">
 import type { AppSettings } from '@/types/AppSettings';
+import { onMounted } from 'vue';
 
 const props = defineProps<{
-        settings: AppSettings
+        settings: AppSettings,
+        settingsVersion: number,
 }>()
 
+
+
 const handleSubmit = () => {
-    alert("settings updated.")
+    emit('update-settings', props.settings);
 }
+
+const emit = defineEmits<{
+  (e: 'update-settings', newSettings: AppSettings): void
+}>();
 
 </script>
 

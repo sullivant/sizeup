@@ -6,7 +6,8 @@ import Settings from '@/components/Settings.vue'
 import type { AppSettings } from '@/types/AppSettings';
 
 const props = defineProps<{
-        settings: AppSettings
+        settings: AppSettings,
+        settingsVersion: number
 }>()
 
 
@@ -37,6 +38,17 @@ const menuItems: MenuItem[] = [
     { label: 'Settings', action: showSettings },
     { label: 'Info', action: showInfo }
 ]
+
+
+
+function handleSettingsUpdate(newSettings: AppSettings) {
+    console.log("header emitting settings:"+newSettings.initialFeatures);
+    emit('update-settings', newSettings);
+}
+
+const emit = defineEmits<{
+  (e: 'update-settings', newSettings: AppSettings): void
+}>();
 </script>
 
 <template>
@@ -60,7 +72,7 @@ const menuItems: MenuItem[] = [
     </header>
 
     <div v-show="displaySettings" class="settings-modal">
-        <Settings :settings="props.settings" />
+        <Settings :settings="props.settings" @update-settings="handleSettingsUpdate" :settings-version="props.settingsVersion" />
     </div>
 </template>
 
@@ -114,7 +126,7 @@ const menuItems: MenuItem[] = [
 
     .settings-modal {
         height: 25%;
-        width: 50%;
+        width: 30%;
         position: fixed;
         top: 50%;
         left: 50%;

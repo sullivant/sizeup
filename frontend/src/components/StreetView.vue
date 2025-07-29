@@ -9,9 +9,6 @@
 
     type LatLng = { lat: number; lng: number }
 
-    const fooKey = import.meta.env.VITE_FOO_KEY
-    console.log("Foo Key is"+fooKey);
-
     const emit = defineEmits<{
         (e: 'locationChosen', payload: { lat: number; lng: number; address: string }): void
     }>()
