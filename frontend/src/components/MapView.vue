@@ -2,9 +2,9 @@
     import { onMounted, ref, watch } from 'vue'
 
     const props = defineProps<{
-    lat: number
-    lng: number
-    address?: string
+        lat: number
+        lng: number
+        address?: string
     }>()
 
     const mapEl = ref<HTMLDivElement | null>(null)

@@ -2,6 +2,14 @@
 import { ref, onMounted } from 'vue'
 import type { MenuItem } from '../types/MenuItem'
 
+import Settings from '@/components/Settings.vue'
+import type { AppSettings } from '@/types/AppSettings';
+
+const props = defineProps<{
+        settings: AppSettings
+}>()
+
+
 const isDark = ref(false) // Default is light mode.
 const toggleTheme = () => {
     isDark.value = !isDark.value
@@ -15,8 +23,10 @@ onMounted(() => {
     document.documentElement.classList.toggle('dark',isDark.value)
 })
 
+const displaySettings = ref(false);
+
 const showSettings = () => {
-    alert('settings clicked')
+    displaySettings.value = !displaySettings.value;
 }
 
 const showInfo = () => {
@@ -48,6 +58,10 @@ const menuItems: MenuItem[] = [
         </nav>
         </div>
     </header>
+
+    <div v-show="displaySettings" class="settings-modal">
+        <Settings :settings="props.settings" />
+    </div>
 </template>
 
 <style scoped>
@@ -91,5 +105,25 @@ const menuItems: MenuItem[] = [
     .menu button {
         margin-left: 1rem;
     }
+
+
+
+    .hidden {
+        visibility: hidden;
+    }
+
+    .settings-modal {
+        height: 25%;
+        width: 50%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        background: var(--color-main-background);
+        padding: 20px;
+        border-radius: 10px;
+    }
+
 
 </style>

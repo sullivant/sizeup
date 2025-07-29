@@ -28,7 +28,7 @@
     function randomlyEnable(items: ScenarioItem[]): ScenarioItem[] {
         const shuffled = [...items].sort(() => Math.random() - 0.5)
         return shuffled.map((item, index) => ({
-            ...item, enabled: index < appSettings.value.initialChosen
+            ...item, enabled: index < appSettings.value.initialFeatures
         }))
     }
 
@@ -63,8 +63,9 @@
 
 <template>
     <div class="app-container">
-        <Header />
+        <Header :settings="appSettings" />
         <ContentGrid :scenario-toggles="scenarioToggles" :scenario-environment="scenarioEnvironment" :apparatus="apparatus" />
+
     </div>
 </template>
 
@@ -80,4 +81,6 @@
     overflow: hidden;
 }
 
+
 </style>
+

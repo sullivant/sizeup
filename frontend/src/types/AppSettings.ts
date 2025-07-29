@@ -1,3 +1,7 @@
 export interface AppSettings {
-    initialChosen: number
+    initialFeatures: number,
+    location: {
+        northeast: { lat: number, lng: number },
+        southwest: { lat: number, lng: number },
+    }
 }
