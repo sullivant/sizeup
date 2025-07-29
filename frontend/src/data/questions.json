@@ -1,0 +1,76 @@
+[
+  {
+    "category": "Building Construction & Condition",
+    "questions": [
+      "What type of building construction is this? (Type I–V)",
+      "How many stories are visible? Are there indicators of a basement?",
+      "What signs suggest lightweight construction or truss systems?",
+      "Are there visible signs of deterioration, renovations, or add-ons?",
+      "What materials is the facade made of? Could they hide fire spread?"
+    ]
+  },
+  {
+    "category": "Occupancy Type & Time Considerations",
+    "questions": [
+      "What is the likely occupancy (residential, commercial, mixed-use)?",
+      "What time of day is it? How might that affect life hazard?",
+      "Are there visible signs of occupancy (cars, lights, signage)?"
+    ]
+  },
+  {
+    "category": "Fire & Smoke Conditions",
+    "questions": [
+      "Where is the fire located (based on smoke or flame)?",
+      "What color and movement is the smoke? What does that suggest?",
+      "Is the fire likely to be venting through the roof, windows, or eaves?",
+      "Are exposures (adjacent buildings) threatened?"
+    ]
+  },
+  {
+    "category": "Access & Egress",
+    "questions": [
+      "What is the primary point of entry for fire attack?",
+      "Are there obvious secondary egress points for crews or civilians?",
+      "Any locked gates, security bars, or obstacles to entry?"
+    ]
+  },
+  {
+    "category": "Apparatus Placement & Water Supply",
+    "questions": [
+      "Where would you place your first engine/truck?",
+      "Is there a hydrant visible? Is it accessible?",
+      "Would aerial access be possible based on wires, trees, setbacks?"
+    ]
+  },
+  {
+    "category": "Life Safety & Rescue Priorities",
+    "questions": [
+      "Are there civilians visible or signs they may be inside?",
+      "Where would you conduct your primary search first?",
+      "What risks are there to firefighters conducting a rescue here?"
+    ]
+  },
+  {
+    "category": "Hazards & Special Considerations",
+    "questions": [
+      "Are there power lines overhead or propane tanks nearby?",
+      "Any visible solar panels, EVs, hazmat placards?",
+      "Any signs of hoarding, poor access, or structural compromise?"
+    ]
+  },
+  {
+    "category": "Decision-Making / Incident Command",
+    "questions": [
+      "Would you consider this an offensive or defensive operation? Why?",
+      "What would be your incident priorities in the first 5 minutes?",
+      "What radio report would you give on arrival?"
+    ]
+  },
+  {
+    "category": "Evolving Scene Awareness",
+    "questions": [
+      "What's changed in the scene since arrival?",
+      "Does this new information affect your plan?"
+    ]
+  }
+]
