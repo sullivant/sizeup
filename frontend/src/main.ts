@@ -8,12 +8,16 @@ import App from './App.vue'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSun, faMoon, faCloudShowersHeavy, faCloudBolt, faSmog, faBed,
     faFire, faTruck as fasTruck, faCar, faRoadBarrier, faFireExtinguisher,
-    faPerson, faWater, faExclamation, faBoltLightning, faMapPin, faTornado, faGears
+    faPerson, faWater, faExclamation, faBoltLightning, faMapPin, faTornado, faGears,
+    
 } from '@fortawesome/free-solid-svg-icons';
 import { faSun as farSun, faSquare, faSquareCheck, faSnowflake, faAlarmClock, 
     faCalendarDays, faTruck, faRectangleList, faLifeRing, 
     faCloud, faLightbulb, faMap, faCircleQuestion
 } from '@fortawesome/free-regular-svg-icons';
+
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faSun, farSun, faMoon, faSquare, faSquareCheck, faSnowflake, 
@@ -21,8 +25,9 @@ library.add(faSun, farSun, faMoon, faSquare, faSquareCheck, faSnowflake,
     faCalendarDays, faTruck, fasTruck, faRectangleList, faLifeRing, 
     faFire, faCar, faRoadBarrier, faCloud, faFireExtinguisher, faPerson,
     faWater, faExclamation, faLightbulb, faBoltLightning, faMapPin,
-    faTornado, faMap, faGears, faCircleQuestion
+    faTornado, faMap, faGears, faCircleQuestion, faGithub
 );
+
 
 // Create the app and include the font awesome component stuff
 createApp(App)

@@ -16,7 +16,8 @@
 
     const handleChangeToSettings = (settings: AppSettings) => {
         saveSettingsToSession(settings);
-        scenarioToggles.value = randomlyEnable(scenarioData);
+        window.location.reload();
+        // scenarioToggles.value = randomlyEnable(scenarioData);
     }
 
     // Save settings to session storage.

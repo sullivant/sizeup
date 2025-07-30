@@ -5,5 +5,9 @@
   { "id": 4, "name": "Engine 3", "enabled": false },
   { "id": 5, "name": "Engine 14", "enabled": false },
   { "id": 6, "name": "Tac 8", "enabled": false },
-  { "id": 7, "name": "Medical", "enabled": false }
+  { "id": 7, "name": "Medical", "enabled": false },
+  { "id": 8, "name": "Hazmat", "enabled": false },
+  { "id": 9, "name": "Ropes", "enabled": false },
+  { "id": 10, "name": "Confined Space", "enabled": false },
+  { "id": 11, "name": "Traffic", "enabled": false }
 ]

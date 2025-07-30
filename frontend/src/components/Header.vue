@@ -5,6 +5,10 @@ import type { MenuItem } from '../types/MenuItem'
 import Settings from '@/components/Settings.vue'
 import type { AppSettings } from '@/types/AppSettings';
 
+import Info from '@/components/Info.vue';
+
+import { appVersion } from '@/version';
+
 const props = defineProps<{
         settings: AppSettings,
         settingsVersion: number
@@ -25,21 +29,22 @@ onMounted(() => {
 })
 
 const displaySettings = ref(false);
+const displayInfo = ref(false);
 
 const showSettings = () => {
+    displayInfo.value = false;
     displaySettings.value = !displaySettings.value;
 }
 
 const showInfo = () => {
-    alert('info clicked')
+    displaySettings.value = false;
+    displayInfo.value = !displayInfo.value;
 }
 
 const menuItems: MenuItem[] = [
     { label: 'Settings', icon: {type: "fas", name: "gears"} ,action: showSettings },
     { label: 'Info', icon: {type: "far", name: "circle-question"}, action: showInfo }
 ]
-
-
 
 function handleSettingsUpdate(newSettings: AppSettings) {
     console.log("header emitting settings:"+newSettings.initialFeatures);
@@ -72,6 +77,10 @@ const emit = defineEmits<{
 
     <div v-show="displaySettings" class="settings-modal">
         <Settings :settings="props.settings" @update-settings="handleSettingsUpdate" :settings-version="props.settingsVersion" />
+    </div>
+
+    <div v-show="displayInfo" class="info-modal">
+        <Info @close-info="showInfo()" />
     </div>
 </template>
 
@@ -118,7 +127,7 @@ const emit = defineEmits<{
         visibility: hidden;
     }
 
-    .settings-modal {
+    .settings-modal, .info-modal {
         height: 25%;
         width: 30%;
         position: fixed;
