@@ -1,6 +1,6 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
-  --vt-c-white: #ffffff;
+  /* --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
 
@@ -22,14 +22,23 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+ */
+
+  --vt-c-cham: #A07354;
+  --vt-c-ash: #ADC2B4;
+  --vt-c-platinum: #E8EDE8;
+  --vt-c-rose: #E5C1BD;
+  --vt-c-bone: #D2D0BA;
+  --vt-c-sage: #B6BE9C;
+  --vt-c-cambridge-blue-soft: #99AE92;
+  --vt-c-cambridge-blue: #7B9E87;
+  --vt-c-paynes-grey: #5E747F;
 }
 
 /* semantic color variables for this project */
 
 :root {
   --color-background: var(--vt-c-white); 
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
 
   /* --color-heading: var(--vt-c-text-light-1); */
   /* --color-text: var(--vt-c-text-light-1); */
@@ -38,33 +47,33 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--color-background-soft);
-    --color-background-soft: var(--vt-c-white-soft);
-    --color-background-mute: var(--vt-c-white-mute);
+    :root {
+        --color-background: var(--vt-c-platinum);
+        --color-main-background: var(--vt-c-ash);
+        --color-header-background: var(--vt-c-paynes-grey);
 
-    --color-main-background: #9db3b8;
+        --color-border: var(--vt-c-divider-dark-2);
+        --color-border-hover: var(--vt-c-divider-dark-1);
+
+        --color-heading: var(--vt-c-text-light-2);
+        --color-text: var(--vt-c-text-light-1);
+
+        --color-submit-button: var(--vt-c-cham);
+    }
+}
+
+.dark {
+    --color-background: var(--vt-c-platinum);
+    --color-main-background: var(--vt-c-ash);
+    --color-header-background: var(--vt-c-paynes-grey);
 
     --color-border: var(--vt-c-divider-dark-2);
     --color-border-hover: var(--vt-c-divider-dark-1);
 
-    --color-heading: var(--vt-c-text-light-2);
-    --color-text: var(--vt-c-text-light-1);
-  }
-}
+    --color-heading: var(--vt-c-text-dark-1);
+    --color-text: var(--vt-c-text-dark-2);
 
-.dark {
-  --color-background: var(--color-background-soft);
-  --color-background-soft: var(--vt-c-black-soft);
-  --color-background-mute: var(--vt-c-black-mute);
-
-  --color-main-background: #9db3b8;
-
-  --color-border: var(--vt-c-divider-dark-2);
-  --color-border-hover: var(--vt-c-divider-dark-1);
-
-  --color-heading: var(--vt-c-text-dark-1);
-  --color-text: var(--vt-c-text-dark-2);
+    --color-submit-button: var(--vt-c-cham);
 }
 
 

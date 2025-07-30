@@ -50,7 +50,7 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        background-color: #788a79;
+        background-color: var(--color-submit-button);
         color: white;
         margin-top: 10px;
     }

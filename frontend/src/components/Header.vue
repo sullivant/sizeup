@@ -102,7 +102,7 @@ const emit = defineEmits<{
         padding: 0rem;
         padding-left: 1rem;
         padding-right: 1rem;
-        background-color: #2c3e50;
+        background-color: var(--color-header-background);
         color: white;
     }
 
