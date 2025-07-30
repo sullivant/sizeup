@@ -88,7 +88,7 @@
         /* flex: 1; */
         width: 100%;
         height: 100%;
-        background-color: var(--color-main-background);/* #ecf0f1; */
+        background-color: var(--color-base-200);/* #ecf0f1; */
         overflow: hidden;
         box-sizing: border-box;
     }
@@ -102,7 +102,7 @@
     }
 
     .main-item {
-        background-color: var(--color-background);
+        background-color: var(--color-base-100);
         padding: 1rem;
         border: 1px solid #ccc;
         display: flex;
@@ -124,7 +124,7 @@
         flex-direction: column;
         height: 100%;
         overflow: hidden;
-        background-color: var(--color-background);
+        background-color: var(--color-base-100);
         border: 1px solid #ccc;
     }
 

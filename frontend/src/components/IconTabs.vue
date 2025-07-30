@@ -106,7 +106,7 @@ const startCloneDrag = (index: number, event: MouseEvent) => {
         flex: 1;
         padding: 0.5rem;
         font-weight: bold;
-        background-color: var(--color-background);
+        background-color: var(--color-base-100);
         border: none;
         border-bottom: 2px solid transparent;
         cursor: pointer;

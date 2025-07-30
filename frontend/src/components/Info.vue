@@ -36,7 +36,7 @@
         padding-left: 1rem;
         height: 2em;
         color: var(--color-side-item-content);
-        background-color: var(--color-background);
+        background-color: var(--color-base-100);
     }
 
 

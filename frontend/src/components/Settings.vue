@@ -195,7 +195,7 @@ const initMap = () => {
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 9999;
-        background: var(--color-main-background);
+        background: var(--color-base-200);
         padding: 20px;
         border-radius: 10px;
         display: flex;
