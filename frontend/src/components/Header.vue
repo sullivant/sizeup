@@ -35,8 +35,8 @@ const showInfo = () => {
 }
 
 const menuItems: MenuItem[] = [
-    { label: 'Settings', action: showSettings },
-    { label: 'Info', action: showInfo }
+    { label: 'Settings', icon: {type: "fas", name: "gears"} ,action: showSettings },
+    { label: 'Info', icon: {type: "far", name: "circle-question"}, action: showInfo }
 ]
 
 
@@ -58,15 +58,14 @@ const emit = defineEmits<{
             <span class="logo-text">Sizeup</span>
         </div>
         <div class="header-r">
-        <div class="theme" @click="toggleTheme">
-            <div v-if="isDark"><font-awesome-icon :icon="['fas', 'moon']" /></div>
-            <div v-else><font-awesome-icon :icon="['fas', 'sun']" /></div>
-        </div>
         <nav class="menu">
-            <button v-for="item in menuItems"
-             :key="item.label" @click="item.action">
-                {{  item.label }}
-            </button>
+            <div class="menu-item" @click="toggleTheme">
+                <div v-if="isDark"><font-awesome-icon :icon="['fas', 'moon']" /></div>
+                <div v-else><font-awesome-icon :icon="['far', 'lightbulb']" /></div>
+            </div>
+            <div class="menu-item" v-for="item in menuItems" :key="item.label" @click="item.action">
+                <font-awesome-icon :icon="[item.icon.type, item.icon.name]" size="1x"/>
+            </div>
         </nav>
         </div>
     </header>
@@ -108,17 +107,12 @@ const emit = defineEmits<{
         align-items: center;
     }
 
-    .theme {
-        display: flex;
-        align-items: center;
-        margin-right: 1rem;
+    .menu {
+        display:flex;
     }
-
-    .menu button {
+    .menu-item {
         margin-left: 1rem;
     }
-
-
 
     .hidden {
         visibility: hidden;

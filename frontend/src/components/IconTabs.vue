@@ -24,6 +24,7 @@ const draggingCloneIndex = ref<number | null>(null);
 
 
 const startClone = (icon: DraggableIcon, event: MouseEvent) => {
+    event.preventDefault();
     const newClone: Clone = {
         id: cloneId++,
         icon,
@@ -55,6 +56,7 @@ const removeClone = (index: number) => {
 };
 
 const startCloneDrag = (index: number, event: MouseEvent) => {
+    event.preventDefault();
     draggingCloneIndex.value = index;
     clones[index].x = event.clientX;
     clones[index].y = event.clientY;
@@ -76,14 +78,14 @@ const startCloneDrag = (index: number, event: MouseEvent) => {
     <div class="tab-content scrollable-container">
         <IconContainer v-show="activeTab === 'icons'" :clones="clones" :onStartClone="startClone" :onStartCloneDrag="startCloneDrag" :onRemoveClone="removeClone" />
 
-      <div v-show="activeTab === 'questions'">
-        <ul v-for="section in questions" :key="section.category">
-          <li><strong>{{ section.category }}</strong></li>
-          <ul>
-            <li v-for="question in section.questions" :key="question">{{ question }}</li>
-          </ul>
-        </ul>
-      </div>
+        <div v-show="activeTab === 'questions'">
+            <ul v-for="section in questions" :key="section.category">
+            <li><strong>{{ section.category }}</strong></li>
+            <ul>
+                <li v-for="question in section.questions" :key="question">{{ question }}</li>
+            </ul>
+            </ul>
+        </div>
     </div>
   </div>
 </template>
