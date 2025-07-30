@@ -136,20 +136,21 @@
         padding: 0.5rem 1rem;
         font-weight: bold;
         border-bottom: 1px solid #ddd;
-        background-color: var(--color-background);
+        background-color: var(--color-side-item-header);
+        color: var(--color-side-item-content);
         flex-shrink: 0;
     }
 
     .scrollable-container {
         flex: 1; 
         overflow-y: auto;
-        padding: 0.5rem;
         border: none;
     }   
 
     .scrollable-container ul {
         list-style: none;
         padding-left: 1em;
+        color: var(--color-side-item-content);
     }
 
     .side-by-side {

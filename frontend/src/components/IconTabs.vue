@@ -110,17 +110,19 @@ const startCloneDrag = (index: number, event: MouseEvent) => {
         border: none;
         border-bottom: 2px solid transparent;
         cursor: pointer;
+        color: var(--color-base-content);
     }
 
     .tab-buttons button.active {
         border-bottom: 2px solid var(--color-primary, #007bff);
-        background-color: var(--color-background-hover, #f0f0f0);
+        background-color: var(--color-base-300);
     }
 
     .tab-content {
         flex: 1;
         overflow-y: auto;
         padding: 0.5rem;
+        color: var(--color-base-content);
     }
 
     

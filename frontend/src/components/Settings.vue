@@ -94,9 +94,9 @@ const initMap = () => {
 
 
     <div v-if="showModal" class="bounding-modal">
-      <div class="settings-header">Northeast: {{ props.settings.location.northeast.lat }}, {{ props.settings.location.northeast.lng }}</div>
-      <div class="settings-header">Southwest: {{ props.settings.location.southwest.lat }}, {{ props.settings.location.southwest.lng }}</div>
-      <div id="map" style="height: 100%; width: 100%;"></div>
+      <div class="bounding-header">Northeast: {{ props.settings.location.northeast.lat }}, {{ props.settings.location.northeast.lng }}</div>
+      <div class="bounding-header">Southwest: {{ props.settings.location.southwest.lat }}, {{ props.settings.location.southwest.lng }}</div>
+      <div id="map" class="bounding-map"></div>
       <div class="form-group"><button @click="closeModal">Close</button></div>
     </div>
 
@@ -106,9 +106,30 @@ const initMap = () => {
     .settings-header {
         padding: 0.5rem 1rem;
         font-weight: bold;
-        border-bottom: 1px solid #6f5656;
-        background-color: var(--color-background);
+        border: 1px solid #ccc;
+        background-color: var(--color-side-item-header);
+        color: var(--color-base-content);
         flex-shrink: 0;
+    }
+    .settings-form {
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    .bounding-header {
+        padding: 0.5rem 1rem;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        background-color: var(--color-side-item-header);
+        color: var(--color-base-content);
+        flex-shrink: 0;
+        font-weight: lighter;
+    }
+    
+    .bounding-map {
+        height: 100%; 
+        width: 100%;
+        border: 1px solid #ccc;
     }
 
     .form-container {
@@ -126,6 +147,7 @@ const initMap = () => {
         margin-bottom: 5px;
         margin-left: 10px;
         padding-top: 5px;
+        color: var(--color-base-content);
     }
     .form-group-header {
         display: flex;

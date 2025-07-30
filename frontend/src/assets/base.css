@@ -1,38 +1,33 @@
-/* color palette from <https://github.com/vuejs/theme> */
 :root {
-  /* --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #353535;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: #2c3e50;
-
-  --vt-c-blue: #0000ff;
-  --vt-c-red: #ff0000;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
- */
-
-  --vt-c-cham: #A07354;
-  --vt-c-ash: #ADC2B4;
-  --vt-c-platinum: #E8EDE8;
-  --vt-c-rose: #E5C1BD;
-  --vt-c-bone: #D2D0BA;
-  --vt-c-sage: #B6BE9C;
-  --vt-c-cambridge-blue-soft: #99AE92;
-  --vt-c-cambridge-blue: #7B9E87;
-  --vt-c-paynes-grey: #5E747F;
+    --color-base-100: oklch(98% 0.003 247.858);
+    --color-base-200: oklch(96% 0.007 247.896);
+    --color-base-300: oklch(92% 0.013 255.508);
+    --color-base-content: oklch(20% 0.042 265.755);
+    --color-primary: oklch(63% 0.237 25.331);
+    --color-primary-content: oklch(97% 0.013 17.38);
+    --color-secondary: oklch(71% 0.143 215.221);
+    --color-secondary-content: oklch(98% 0.019 200.873);
+    --color-accent: oklch(60% 0.25 292.717);
+    --color-accent-content: oklch(96% 0.016 293.756);
+    --color-neutral: oklch(27% 0.041 260.031);
+    --color-neutral-content: oklch(98% 0.003 247.858);
+    --color-info: oklch(71% 0.143 215.221);
+    --color-info-content: oklch(98% 0.019 200.873);
+    --color-success: oklch(69% 0.17 162.48);
+    --color-success-content: oklch(97% 0.021 166.113);
+    --color-warning: oklch(76% 0.188 70.08);
+    --color-warning-content: oklch(98% 0.022 95.277);
+    --color-error: oklch(63% 0.237 25.331);
+    --color-error-content: oklch(97% 0.013 17.38);
+    --radius-selector: 0.5rem;
+    --radius-field: 0.25rem;
+    --radius-box: 0.25rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 0;
+    --noise: 0;
+    
 }
 
 /* semantic color variables for this project */
@@ -44,36 +39,58 @@
   /* --color-text: var(--vt-c-text-light-1); */
 
   --section-gap: 160px;
+
+  --color-submit-button: var(--color-info);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-background: var(--vt-c-platinum);
-        --color-main-background: var(--vt-c-ash);
-        --color-header-background: var(--vt-c-paynes-grey);
+        --color-background: var(--color-base-100);
+        --color-main-background: var(--color-base-200);
+        --color-header-background: var(--color-neutral);
 
+        --color-side-item-header: var(--color-base-300);
+        --color-side-item-content: var(--color-base-content);
+        
         --color-border: var(--vt-c-divider-dark-2);
         --color-border-hover: var(--vt-c-divider-dark-1);
 
         --color-heading: var(--vt-c-text-light-2);
         --color-text: var(--vt-c-text-light-1);
 
-        --color-submit-button: var(--vt-c-cham);
+        
     }
 }
 
 .dark {
-    --color-background: var(--vt-c-platinum);
-    --color-main-background: var(--vt-c-ash);
-    --color-header-background: var(--vt-c-paynes-grey);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-
-    --color-submit-button: var(--vt-c-cham);
+    --color-base-100: oklch(25.33% 0.016 252.42);
+    --color-base-200: oklch(23.26% 0.014 253.1);
+    --color-base-300: oklch(21.15% 0.012 254.09);
+    --color-base-content: oklch(97.807% 0.029 256.847);
+    --color-primary: oklch(58% 0.233 277.117);
+    --color-primary-content: oklch(96% 0.018 272.314);
+    --color-secondary: oklch(65% 0.241 354.308);
+    --color-secondary-content: oklch(94% 0.028 342.258);
+    --color-accent: oklch(77% 0.152 181.912);
+    --color-accent-content: oklch(38% 0.063 188.416);
+    --color-neutral: oklch(14% 0.005 285.823);
+    --color-neutral-content: oklch(92% 0.004 286.32);
+    --color-info: oklch(74% 0.16 232.661);
+    --color-info-content: oklch(29% 0.066 243.157);
+    --color-success: oklch(76% 0.177 163.223);
+    --color-success-content: oklch(37% 0.077 168.94);
+    --color-warning: oklch(82% 0.189 84.429);
+    --color-warning-content: oklch(41% 0.112 45.904);
+    --color-error: oklch(71% 0.194 13.428);
+    --color-error-content: oklch(27% 0.105 12.094);
+    --radius-selector: 0.5rem;
+    --radius-field: 0.25rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
 }
 
 

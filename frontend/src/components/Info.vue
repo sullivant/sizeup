@@ -26,7 +26,8 @@
         padding: 0.5rem 1rem;
         font-weight: bold;
         border-bottom: 1px solid #6f5656;
-        background-color: var(--color-background);
+        background-color: var(--color-side-item-header);
+        color: var(--color-base-content);
         flex-shrink: 0;
     }
     .info-content {
@@ -34,6 +35,7 @@
         flex-direction: column;
         padding-left: 1rem;
         height: 2em;
+        color: var(--color-side-item-content);
         background-color: var(--color-background);
     }
 
@@ -51,7 +53,7 @@
         border-radius: 4px;
         cursor: pointer;
         background-color: var(--color-submit-button);
-        color: white;
+        color: var(--color-base-content);
         margin-top: 10px;
     }
 
