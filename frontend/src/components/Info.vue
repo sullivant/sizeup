@@ -26,7 +26,7 @@
         padding: 0.5rem 1rem;
         font-weight: bold;
         border-bottom: 1px solid #6f5656;
-        background-color: var(--color-side-item-header);
+        background-color: var(--color-base-300);
         color: var(--color-base-content);
         flex-shrink: 0;
     }
@@ -35,7 +35,7 @@
         flex-direction: column;
         padding-left: 1rem;
         height: 2em;
-        color: var(--color-side-item-content);
+        color: var(--color-base-content);
         background-color: var(--color-base-100);
     }
 

@@ -136,8 +136,8 @@
         padding: 0.5rem 1rem;
         font-weight: bold;
         border-bottom: 1px solid #ddd;
-        background-color: var(--color-side-item-header);
-        color: var(--color-side-item-content);
+        background-color: var(--color-base-300);
+        color: var(--color-base-content);
         flex-shrink: 0;
     }
 
@@ -150,7 +150,7 @@
     .scrollable-container ul {
         list-style: none;
         padding-left: 1em;
-        color: var(--color-side-item-content);
+        color: var(--color-base-content);
     }
 
     .side-by-side {

@@ -33,20 +33,6 @@
   --color-submit-button: var(--color-info);
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-side-item-header: var(--color-base-300);
-        --color-side-item-content: var(--color-base-content);
-        
-        --color-border: var(--vt-c-divider-dark-2);
-        --color-border-hover: var(--vt-c-divider-dark-1);
-
-        --color-heading: var(--vt-c-text-light-2);
-        --color-text: var(--vt-c-text-light-1);
-
-        
-    }
-}
 
 .dark {
     --color-base-100: oklch(25.33% 0.016 252.42);

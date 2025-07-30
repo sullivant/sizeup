@@ -107,7 +107,7 @@ const initMap = () => {
         padding: 0.5rem 1rem;
         font-weight: bold;
         border: 1px solid #ccc;
-        background-color: var(--color-side-item-header);
+        background-color: var(--color-base-300);
         color: var(--color-base-content);
         flex-shrink: 0;
     }
@@ -120,7 +120,7 @@ const initMap = () => {
         padding: 0.5rem 1rem;
         border: 1px solid #ccc;
         border-bottom: none;
-        background-color: var(--color-side-item-header);
+        background-color: var(--color-base-300);
         color: var(--color-base-content);
         flex-shrink: 0;
         font-weight: lighter;
