@@ -15,7 +15,6 @@
     <div class="info-content">App Version: {{  appVersion }}</div>
     <div class="info-content">Author: Thomas Sullivan</div>
     <div class="info-content"><a href="http://github.com/sullivant/sizeup" target="_blank"><font-awesome-icon :icon='"fab fa-github"'/></a></div>
-
     <div class="button-container">
         <button @click="emit('close-info')">Close</button>
     </div>
@@ -32,6 +31,7 @@
     }
     .info-content {
         display: flex;
+        flex:1;
         flex-direction: column;
         padding-left: 1rem;
         height: 2em;

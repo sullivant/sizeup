@@ -19,6 +19,8 @@ const showModal = ref(false);
 const map = ref<google.maps.Map | null>(null);
 const clickCount = ref(0);
 const bounds = ref<{ northeast: google.maps.LatLngLiteral, southwest: google.maps.LatLngLiteral } | null>(null);
+const rectangle = ref<google.maps.Rectangle | null>(null);
+
 
 const openModal = async () => {
   showModal.value = true;
@@ -29,7 +31,14 @@ const openModal = async () => {
 const closeModal = () => {
   showModal.value = false;
   clickCount.value = 0;
+
+    if (rectangle.value) {
+        rectangle.value.setMap(null);
+        rectangle.value = null;
+    }
 };
+
+
 
 const initMap = () => {
   const mapOptions = {
@@ -39,19 +48,57 @@ const initMap = () => {
 
   map.value = new google.maps.Map(document.getElementById('map') as HTMLElement, mapOptions);
 
-  map.value.addListener('click', (e: google.maps.MapMouseEvent) => {
+    map.value.addListener('click', (e: google.maps.MapMouseEvent) => {
     if (!e.latLng) return;
 
     if (clickCount.value === 0) {
-      bounds.value = { northeast: e.latLng.toJSON(), southwest: { lat: 0, lng: 0 } };
-      clickCount.value++;
+        if (rectangle.value) {
+            rectangle.value.setMap(null);
+            rectangle.value = null;
+        }
+
+        bounds.value = {
+            northeast: e.latLng.toJSON(),
+            southwest: { lat: 0, lng: 0 },
+        };
+        clickCount.value++;
     } else if (clickCount.value === 1 && bounds.value) {
-      bounds.value.southwest = e.latLng.toJSON();
-      props.settings.location.northeast = bounds.value.northeast;
-      props.settings.location.southwest = bounds.value.southwest;
-      clickCount.value = 0;
+        bounds.value.southwest = e.latLng.toJSON();
+
+        // Normalize bounds to ensure NE is top-right and SW is bottom-left
+        const ne = {
+        lat: Math.max(bounds.value.northeast.lat, bounds.value.southwest.lat),
+        lng: Math.max(bounds.value.northeast.lng, bounds.value.southwest.lng),
+        };
+        const sw = {
+        lat: Math.min(bounds.value.northeast.lat, bounds.value.southwest.lat),
+        lng: Math.min(bounds.value.northeast.lng, bounds.value.southwest.lng),
+        };
+
+        // Save to settings
+        props.settings.location.northeast = ne;
+        props.settings.location.southwest = sw;
+
+        // Remove previous rectangle if it exists
+        if (rectangle.value) {
+        rectangle.value.setMap(null);
+        }
+
+        // Draw new rectangle
+        rectangle.value = new google.maps.Rectangle({
+        bounds: new google.maps.LatLngBounds(sw, ne),
+        strokeColor: '#bdc9a9',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#bdc9a9',
+        fillOpacity: 0.35,
+        map: map.value,
+        });
+
+        clickCount.value = 0;
     }
-  });
+    });
+
 };
 
 
@@ -97,7 +144,7 @@ const initMap = () => {
       <div class="bounding-header">Northeast: {{ props.settings.location.northeast.lat }}, {{ props.settings.location.northeast.lng }}</div>
       <div class="bounding-header">Southwest: {{ props.settings.location.southwest.lat }}, {{ props.settings.location.southwest.lng }}</div>
       <div id="map" class="bounding-map"></div>
-      <div class="form-group"><button @click="closeModal">Close</button></div>
+      <div class="bounding-header"><button @click="closeModal">Close</button></div>
     </div>
 
 </template>
@@ -106,7 +153,7 @@ const initMap = () => {
     .settings-header {
         padding: 0.5rem 1rem;
         font-weight: bold;
-        border: 1px solid #ccc;
+        border-bottom: 1px solid #6f5656;
         background-color: var(--color-base-300);
         color: var(--color-base-content);
         flex-shrink: 0;
@@ -114,6 +161,8 @@ const initMap = () => {
     .settings-form {
         border: 1px solid #ccc;
         border-top: none;
+        color: var(--color-base-content);
+        background-color: var(--color-base-100);
     }
 
     .bounding-header {
@@ -148,6 +197,7 @@ const initMap = () => {
         margin-left: 10px;
         padding-top: 5px;
         color: var(--color-base-content);
+        background-color: var(--color-base-100);
     }
     .form-group-header {
         display: flex;
@@ -184,7 +234,7 @@ const initMap = () => {
 
     button[type="submit"] {
         background-color: var(--color-submit-button);
-        color: white;
+        color: var(--color-base-content);
     }
 
     .bounding-modal {
