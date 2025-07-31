@@ -28,15 +28,15 @@
 
     if (props.address) {
         const infoWindow = new google.maps.InfoWindow({
-        content: `<div style="font-size:14px;">📍 ${props.address}</div>`,
+            content: `<div style="font-size:14px;">📍 ${props.address}</div>`,
         })
 
-        // Show the info window immediately
-        infoWindow.open(map, marker)
+        // // Show the info window immediately
+        // infoWindow.open(map, marker)
 
-        // Optional: Show info window on click
+        // Show info window on click
         marker.addListener('click', () => {
-        infoWindow.open(map, marker)
+            infoWindow.open(map, marker)
         })
     }
     })

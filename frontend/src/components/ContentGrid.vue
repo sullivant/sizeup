@@ -40,7 +40,7 @@
             <div class="side-items">
                 <div class="side-item side-item-short">
                     <div class="scrollable-container">
-                    <div class="side-header"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
+                    <div class="side-header address"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
                     <ScenarioEnvironment :scenario-environment="scenarioEnvironment"/>
                     </div>
                 </div>
@@ -163,8 +163,7 @@
     .side-by-side .side-item {
         flex: 1;
         height: 100%;
-    }
-
+        }
 
     @media (max-width: 768px) {
         .row {
@@ -174,25 +173,43 @@
             flex: 1;
         }
 
-        .side-items {
-            display: none !important;
-        }
-
         .main-item {
             width: 100%;
-            height: auto;
+            height: 70%;
             border: 1px solid #ccc;
             display: flex;
             flex-direction: column;
-            flex: 1;
+            flex: none;
         }
 
-        .side-item,
-        .side-item-short,
+        .side-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .side-item-short {
+            display: flex;
+            height: 300px;
+        }
+
         .side-by-side {
             display: none !important;
         }
+
+        .side-item:not(.side-item-short) {
+            display: none !important;
+        }
+
+        .address {
+            display: none !important;
+        }
+
+        .scrollable-container {
+            padding-top: 10px;
+        }
     }
+
 
 
 
