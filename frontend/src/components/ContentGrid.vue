@@ -165,7 +165,7 @@
         height: 100%;
         }
 
-    @media (max-width: 768px) {
+    @media (max-width: 896px) {
         .row {
             display: flex;
             flex-direction: column;
