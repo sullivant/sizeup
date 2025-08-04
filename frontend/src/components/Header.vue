@@ -23,7 +23,11 @@ const toggleTheme = () => {
 
 onMounted(() => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: light)').matches 
-    isDark.value = prefersDark
+
+    console.log("Prefers dark is: "+prefersDark);
+
+    // isDark.value = !prefersDark
+    isDark.value = false; // I want light first.
 
     document.documentElement.classList.toggle('dark',isDark.value)
 })
