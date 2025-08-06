@@ -36,7 +36,13 @@
     <main class="grid-container">
         <div class="main-item">
             <!-- <StreetView :settings="props.settings"  @locationChosen="handleLocationChosen"/> -->
-
+            <div class="address">
+                <div class="scrollable-container">
+                <div class="side-header"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
+                <ScenarioEnvironment :scenario-environment="scenarioEnvironment"/>
+                </div>
+            </div>
+            
             <MainTabs
                 :settings="props.settings"
                 :chosenLatLng="chosenLatLng"
@@ -49,7 +55,7 @@
             <div class="right-row">
                 <div class="side-item">
                     <div class="scrollable-container">
-                    <div class="side-header address"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
+                    <div class="side-header"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
                     <ScenarioEnvironment :scenario-environment="scenarioEnvironment"/>
                     </div>
                 </div>
@@ -106,7 +112,6 @@
         height: 100%;
     
     }
-
     .right-column {
         display: grid;
         grid-template-columns: 1fr;
@@ -167,50 +172,27 @@
     .side-by-side .side-item {
         flex: 1;
         height: 100%;
-        }
+    }
+
+    .address {
+        display: none;
+    }
 
     @media (max-width: 896px) {
-        .row {
-            display: flex;
-            flex-direction: column;
-            height: auto;
-            flex: 1;
-        }
-
         .main-item {
             width: 100%;
-            height: 70%;
-            border: 1px solid #ccc;
-            display: flex;
-            flex-direction: column;
-            flex: none;
-        }
-
-        .side-items {
-            display: flex;
-            flex-direction: column;
             gap: 1rem;
         }
 
-        .right-row-short {
-            display: flex;
-            height: 300px;
-        }
-
-        .side-by-side {
-            display: none !important;
-        }
-
-        .side-item:not(.side-item-short) {
+        .right-column {
             display: none !important;
         }
 
         .address {
-            display: none !important;
-        }
-
-        .scrollable-container {
-            padding-top: 10px;
+            background-color: var(--color-base-100);
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
         }
     }
 
