@@ -44,9 +44,10 @@ const props = defineProps<{
     .icon-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
+        gap: 0.5rem;
         max-width: 400px;
         margin: auto;
+        padding: 1rem;
     }
     .icon-cell {
         display: flex;
@@ -76,7 +77,7 @@ const props = defineProps<{
         .icon-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            gap: 0.5rem;
             max-width: 400px;
             margin: auto;
         }

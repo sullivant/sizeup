@@ -69,61 +69,9 @@ const startCloneDrag = (index: number, event: MouseEvent) => {
 </script>
 
 <template>
-  <div class="tabs-container">
-    <div class="tab-buttons">
-      <button :class="{ active: activeTab === 'icons' }" @click="activeTab = 'icons'">Icons</button>
-      <button :class="{ active: activeTab === 'questions' }" @click="activeTab = 'questions'">Size-Up Questions</button>
-    </div>
-
-    <div class="tab-content scrollable-container">
-        <IconContainer v-show="activeTab === 'icons'" :clones="clones" :onStartClone="startClone" :onStartCloneDrag="startCloneDrag" :onRemoveClone="removeClone" />
-
-        <div v-show="activeTab === 'questions'">
-            <ul v-for="section in questions" :key="section.category">
-            <li><strong>{{ section.category }}</strong></li>
-            <ul>
-                <li v-for="question in section.questions" :key="question">{{ question }}</li>
-            </ul>
-            </ul>
-        </div>
-    </div>
-  </div>
+    <IconContainer v-show="activeTab === 'icons'" :clones="clones" :onStartClone="startClone" :onStartCloneDrag="startCloneDrag" :onRemoveClone="removeClone" />
 </template>
 
 <style scoped>
-    .tabs-container {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
-
-    .tab-buttons {
-        display: flex;
-        border-bottom: 1px solid #ccc;
-    }
-
-    .tab-buttons button {
-        flex: 1;
-        padding: 0.5rem;
-        font-weight: bold;
-        background-color: var(--color-base-100);
-        border: none;
-        border-bottom: 2px solid transparent;
-        cursor: pointer;
-        color: var(--color-base-content);
-    }
-
-    .tab-buttons button.active {
-        border-bottom: 2px solid var(--color-primary, #007bff);
-        background-color: var(--color-base-300);
-    }
-
-    .tab-content {
-        flex: 1;
-        overflow-y: auto;
-        padding: 0.5rem;
-        color: var(--color-base-content);
-    }
-
     
 </style>

@@ -78,6 +78,7 @@
             </div>
             <div class="right-row">
                 <div class="side-item">
+                    <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/> Icons</div>
                     <div class="scrollable-container">
                         <IconTabs />
                     </div>
@@ -139,15 +140,19 @@
         flex-direction: column;
         overflow: hidden;
         background-color: var(--color-base-100);
-        border: 1px solid #ccc;
+        border: var(--border) solid #ccc;
+        border-radius: var(--radius-box);
     }
     .side-header {
         padding: 0.5rem 1rem;
         font-weight: bold;
-        border-bottom: 1px solid #ddd;
         background-color: var(--color-base-300);
         color: var(--color-base-content);
         flex-shrink: 0;
+        border: var(--border) solid #ccc;
+        border-top-left-radius: var(--radius-box);
+        border-top-right-radius: var(--radius-box);
+        border-bottom: var(--border) solid #ddd;
     }
 
     .scrollable-container {
@@ -190,6 +195,8 @@
 
         .address {
             background-color: var(--color-base-100);
+            border: var(--border) solid #ccc;
+            border-radius: var(--radius-box);            
             display: flex;
             flex-direction: column;
             min-height: 0;
