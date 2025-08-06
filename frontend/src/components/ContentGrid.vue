@@ -7,6 +7,7 @@
     import StreetView from '@/components/StreetView.vue';
     import MapView from '@/components/MapView.vue';
     import IconTabs from '@/components/IconTabs.vue';
+    import MainTabs from '@/components/MainTabs.vue';
 
     import type { ScenarioItem } from '@/types/ScenarioItem'
     import type { ScenarioEnvironment as typeScenarioEnvironment } from '@/types/typeScenarioEnvironment';
@@ -33,18 +34,27 @@
 
 <template>
     <main class="grid-container">
-        <div class="row">
-            <div class="main-item">
-                <StreetView :settings="props.settings"  @locationChosen="handleLocationChosen"/>
-            </div>
-            <div class="side-items">
-                <div class="side-item side-item-short">
+        <div class="main-item">
+            <!-- <StreetView :settings="props.settings"  @locationChosen="handleLocationChosen"/> -->
+
+            <MainTabs
+                :settings="props.settings"
+                :chosenLatLng="chosenLatLng"
+                :chosenAddress="chosenAddress"
+                @locationChosen="handleLocationChosen"
+            />
+
+        </div>
+        <div class="right-column">
+            <div class="right-row">
+                <div class="side-item">
                     <div class="scrollable-container">
                     <div class="side-header address"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
                     <ScenarioEnvironment :scenario-environment="scenarioEnvironment"/>
                     </div>
                 </div>
-
+            </div>
+            <div class="right-row">
                 <div class="side-by-side">
                     <div class="side-item">
                         <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Features</div>
@@ -60,15 +70,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="main-item">
-                <!-- <MapView v-if="chosenLatLng" :center="chosenLatLng" /> -->
-                <MapView  v-if="chosenLatLng"  :lat="chosenLatLng.lat" :lng="chosenLatLng.lng" :address="chosenAddress" />
-
-            </div>
-            <div class="side-items">
-
+            <div class="right-row">
                 <div class="side-item">
                     <div class="scrollable-container">
                         <IconTabs />
@@ -77,12 +79,15 @@
             </div>
         </div>
     </main>
+
+
+
 </template>
 
 <style scoped>
     .grid-container {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 1rem;
         padding: 1rem;
         /* flex: 1; */
@@ -93,45 +98,44 @@
         box-sizing: border-box;
     }
 
-    .row {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 1rem;
-        height: 50%;
-        min-height: 0;
+    .main-item {
+        display: flex;
+        flex-direction: column;
+        width: 75%;
+        min-width: 75%;
+        height: 100%;
+    
     }
 
-    .main-item {
-        background-color: var(--color-base-100);
-        padding: 1rem;
-        border: 1px solid #ccc;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow-y: auto;
+    .right-column {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .right-row {
+        flex: 1;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .right-row:last-child {
+        border-bottom: none;
+        margin-bottom: none;
     }
 
     .side-items {
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        height: 100%;
         min-height: 0;
     }
-
     .side-item {
         display: flex;
         flex-direction: column;
-        height: 100%;
         overflow: hidden;
         background-color: var(--color-base-100);
         border: 1px solid #ccc;
     }
-
-    .side-item-short {
-        height: 50%;
-    }
-
     .side-header {
         padding: 0.5rem 1rem;
         font-weight: bold;
@@ -188,7 +192,7 @@
             gap: 1rem;
         }
 
-        .side-item-short {
+        .right-row-short {
             display: flex;
             height: 300px;
         }
