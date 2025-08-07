@@ -1,35 +1,79 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
-import type { DraggableIcon } from '@/types/DraggableIcon';
+    import { ref, reactive } from 'vue';
+    import type { DraggableIcon } from '@/types/DraggableIcon';
 
-import iconData from '@/data/icons.json';
+    import iconData from '@/data/icons.json';
 
-const icons = ref<DraggableIcon[]>(iconData);
+    const icons = ref<DraggableIcon[]>(iconData);
 
-interface Clone {
-    id: number;
-    icon: DraggableIcon;
-    x: number;
-    y: number;
-}
+    interface Clone {
+        id: number;
+        icon: DraggableIcon;
+        x: number;
+        y: number;
+    }
 
-const props = defineProps<{
-    clones: Clone[],
-    onStartClone: (icon: DraggableIcon, event: MouseEvent) => void;
-    onStartCloneDrag: (index: number, event: MouseEvent) => void;
-    onRemoveClone: (index: number) => void;
-}>();
+    function getIconImage(icon: DraggableIcon) {
+        return('/icons/'+icon.icon.name);
+    }
 
-function getIconImage(icon: DraggableIcon) {
-    return('/icons/'+icon.icon.name);
-}
+    const clones = reactive<Clone[]>([]);
+    let cloneId = 0;
+    const draggingCloneIndex = ref<number | null>(null);
+
+
+    const startClone = (icon: DraggableIcon, event: MouseEvent) => {
+        event.preventDefault();
+        const newClone: Clone = {
+            id: cloneId++,
+            icon,
+            x: event.clientX,
+            y: event.clientY,
+        };
+        clones.push(newClone);
+        draggingCloneIndex.value = clones.length - 1;
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', stopDrag);
+    };
+
+    const onMouseMove = (event: MouseEvent) => {
+        if (draggingCloneIndex.value !== null) {
+            clones[draggingCloneIndex.value].x = event.clientX;
+            clones[draggingCloneIndex.value].y = event.clientY;
+        }
+    };
+
+    const stopDrag = () => {
+        draggingCloneIndex.value = null;
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', stopDrag);
+    }
+
+    const removeClone = (index: number) => {
+        clones.splice(index, 1);
+    };
+
+    const startCloneDrag = (index: number, event: MouseEvent) => {
+        event.preventDefault();
+        draggingCloneIndex.value = index;
+        clones[index].x = event.clientX;
+        clones[index].y = event.clientY;
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', stopDrag);
+    };
+
+
+
+
 
 
 </script>
 
 <template>
     <div class="icon-grid">
-        <div v-for="icon in icons" :key="icon.id" class="icon-cell" @mousedown.left="onStartClone(icon, $event)">
+        <div v-for="icon in icons" :key="icon.id" class="icon-cell" @mousedown.left="startClone(icon, $event)">
             <div v-if="icon.icon.type === 'svg'"><img :src="getIconImage(icon)" :class="icon.icon.action"></div>
             <font-awesome-icon v-else :icon="[icon.icon.type, icon.icon.name]" size="2x"  :class="icon.icon.action" />
         </div>
@@ -37,8 +81,8 @@ function getIconImage(icon: DraggableIcon) {
         <div
             v-for="(clone, index) in clones" :key="clone.id" class="icon-clone"
             :style="{ top: clone.y + 'px', left: clone.x + 'px' }"
-            @contextmenu.prevent="onRemoveClone(index)"
-            @mousedown.left="(event: any) => onStartCloneDrag(index, event)">
+            @contextmenu.prevent="removeClone(index)"
+            @mousedown.left="(event: any) => startCloneDrag(index, event)">
             <div v-if="clone.icon.icon.type === 'svg'"><img :src="getIconImage(clone.icon)" :class="clone.icon.icon.action" ></div>
             <font-awesome-icon v-else :icon="[clone.icon.icon.type, clone.icon.icon.name]" size="2x" />
         </div>
