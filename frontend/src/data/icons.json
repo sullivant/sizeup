@@ -1,7 +1,7 @@
 [
 
-    {"id": 4, "icon": {"type": "gif", "name": "fire.svg", "action": "fire-effect"} },
-    {"id": 22, "icon": {"type": "fas", "name": "truck"} },
+    {"id": 4, "icon": {"type": "svg", "name": "fire.svg", "action": "fire-effect"} },
+    {"id": 22, "icon": {"type": "svg", "name": "alarm-bell.svg", "action": "wiggle"} },
     {"id": 23, "icon": {"type": "fas", "name": "car"} },
     {"id": 25, "icon": {"type": "fas", "name": "road-barrier"} },
     {"id": 26, "icon": {"type": "fas", "name": "smog"} },

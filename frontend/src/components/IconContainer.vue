@@ -30,7 +30,7 @@ function getIconImage(icon: DraggableIcon) {
 <template>
     <div class="icon-grid">
         <div v-for="icon in icons" :key="icon.id" class="icon-cell" @mousedown.left="onStartClone(icon, $event)">
-            <div v-if="icon.icon.type === 'gif'"><img :src="getIconImage(icon)" width="32px" height="32px" :class="icon.icon.action"></div>
+            <div v-if="icon.icon.type === 'svg'"><img :src="getIconImage(icon)" width="32px" height="32px" :class="icon.icon.action"></div>
             <font-awesome-icon v-else :icon="[icon.icon.type, icon.icon.name]" size="2x"  :class="icon.icon.action" />
         </div>
 
@@ -39,7 +39,7 @@ function getIconImage(icon: DraggableIcon) {
             :style="{ top: clone.y + 'px', left: clone.x + 'px' }"
             @contextmenu.prevent="onRemoveClone(index)"
             @mousedown.left="(event: any) => onStartCloneDrag(index, event)">
-            <div v-if="clone.icon.icon.type === 'gif'"><img :src="getIconImage(clone.icon)" width="32" :class="clone.icon.icon.action" ></div>
+            <div v-if="clone.icon.icon.type === 'svg'"><img :src="getIconImage(clone.icon)" width="32" :class="clone.icon.icon.action" ></div>
             <font-awesome-icon v-else :icon="[clone.icon.icon.type, clone.icon.icon.name]" size="2x" />
         </div>
     </div>
@@ -115,15 +115,15 @@ function getIconImage(icon: DraggableIcon) {
             opacity: 0.9;
         }
         25% {
-            transform: scale(1.05) skewX(2deg);
+            transform: scale(1.5) skewX(20deg);
             opacity: 1;
         }
         50% {
-            transform: scale(1.1) skewX(-2deg);
+            transform: scale(1.1) skewX(-20deg);
             opacity: 0.85;
         }
         75% {
-            transform: scale(1.05) skewX(1deg);
+            transform: scale(1.5) skewX(1deg);
             opacity: 0.95;
         }
         100% {
