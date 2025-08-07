@@ -17,6 +17,7 @@
         y: number;
         width: number;
         height: number;
+        type: string;
     }
 
     function getIconImage(icon: DraggableIcon) {
@@ -29,7 +30,9 @@
     const resizingCloneIndex = ref<number | null>(null);
     const initialMouse = ref<{ x: number; y: number } | null>(null);
 
-
+    function shouldShowClone(clone: Clone) {
+        return clone.type === (props.streetViewActive ? 'street' : 'map')
+    }
 
     const startClone = (icon: DraggableIcon, event: MouseEvent) => {
         event.preventDefault();
@@ -39,8 +42,12 @@
             x: event.clientX,
             y: event.clientY,
             width: 64,
-            height: 64
+            height: 64,
+            type: (props.streetViewActive ? 'street' : 'map'),
         };
+
+        console.log("Clone "+cloneId+" type is: "+newClone.type);
+
         clones.push(newClone);
         draggingCloneIndex.value = clones.length - 1;
 
@@ -120,18 +127,19 @@
             <!-- <font-awesome-icon v-else :icon="[icon.icon.type, icon.icon.name]" size="2x"  :class="icon.icon.action" /> -->
         </div>
 
-        <div v-show="props.streetViewActive"
+        <div
             v-for="(clone, index) in clones" :key="clone.id" class="icon-clone"
             :style="{ top: clone.y + 'px', left: clone.x + 'px' }"
             @contextmenu.prevent="removeClone(index)"
-            @mousedown.left="(event: any) => startCloneDrag(index, event)">
-            <div v-if="clone.icon.icon.type === 'svg'"><img :src="getIconImage(clone.icon)" :class="clone.icon.icon.action" :width="clone.width" :heigh="clone.height" ></div>
-            <!-- <font-awesome-icon v-else :icon="[clone.icon.icon.type, clone.icon.icon.name]" size="2x" /> -->
+            @mousedown.left="(event: any) => startCloneDrag(index, event)"
+            v-show="shouldShowClone(clone)">
+                <div v-if="clone.icon.icon.type === 'svg'"><img :src="getIconImage(clone.icon)" :class="clone.icon.icon.action" :width="clone.width" :heigh="clone.height" ></div>
+                <!-- <font-awesome-icon v-else :icon="[clone.icon.icon.type, clone.icon.icon.name]" size="2x" /> -->
 
-            <div
-                class="resize-handle"
-                @mousedown.stop.prevent="startResize(index, $event)"
-            ></div>
+                <div
+                    class="resize-handle"
+                    @mousedown.stop.prevent="startResize(index, $event)"
+                ></div>
         </div>
     </div>
 </template>
