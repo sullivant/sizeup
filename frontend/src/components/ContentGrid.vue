@@ -109,6 +109,7 @@
         display: grid;
         grid-template-columns: 1fr;
         gap: 1rem;
+        width: 25%;
     }
     .right-row {
         flex: 1;

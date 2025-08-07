@@ -29,6 +29,9 @@
   --section-gap: 160px;
 
   --color-submit-button: var(--color-info);
+
+  --icon-width: 32px;
+  --icon-height: 32px;
 }
 
 

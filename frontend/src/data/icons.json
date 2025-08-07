@@ -1,10 +1,15 @@
 [
 
-    {"id": 4, "icon": {"type": "svg", "name": "fire.svg", "action": "fire-effect"} },
-    {"id": 22, "icon": {"type": "svg", "name": "alarm-bell.svg", "action": "wiggle"} },
+    {"id": 1, "icon": {"type": "svg", "name": "fire.svg", "action": "fire-effect"} },
+    {"id": 2, "icon": {"type": "svg", "name": "alarm-bell.svg", "action": "wiggle"} },
+    {"id": 3, "icon": {"type": "svg", "name": "smoke.svg", "action": "wiggle"} },
+    {"id": 4, "icon": {"type": "svg", "name": "dark-smoke.svg", "action": "wiggle"} },
+
+
+
     {"id": 23, "icon": {"type": "fas", "name": "car"} },
     {"id": 25, "icon": {"type": "fas", "name": "road-barrier"} },
-    {"id": 26, "icon": {"type": "fas", "name": "smog"} },
+   
     {"id": 27, "icon": {"type": "far", "name": "cloud", "action": "wiggle"} },
     {"id": 28, "icon": {"type": "fas", "name": "fire-extinguisher"} },
     {"id": 29, "icon": {"type": "fas", "name": "person"} },

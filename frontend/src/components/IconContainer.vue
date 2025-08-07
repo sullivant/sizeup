@@ -30,7 +30,7 @@ function getIconImage(icon: DraggableIcon) {
 <template>
     <div class="icon-grid">
         <div v-for="icon in icons" :key="icon.id" class="icon-cell" @mousedown.left="onStartClone(icon, $event)">
-            <div v-if="icon.icon.type === 'svg'"><img :src="getIconImage(icon)" width="32px" height="32px" :class="icon.icon.action"></div>
+            <div v-if="icon.icon.type === 'svg'"><img :src="getIconImage(icon)" :class="icon.icon.action"></div>
             <font-awesome-icon v-else :icon="[icon.icon.type, icon.icon.name]" size="2x"  :class="icon.icon.action" />
         </div>
 
@@ -39,7 +39,7 @@ function getIconImage(icon: DraggableIcon) {
             :style="{ top: clone.y + 'px', left: clone.x + 'px' }"
             @contextmenu.prevent="onRemoveClone(index)"
             @mousedown.left="(event: any) => onStartCloneDrag(index, event)">
-            <div v-if="clone.icon.icon.type === 'svg'"><img :src="getIconImage(clone.icon)" width="32" :class="clone.icon.icon.action" ></div>
+            <div v-if="clone.icon.icon.type === 'svg'"><img :src="getIconImage(clone.icon)" :class="clone.icon.icon.action" ></div>
             <font-awesome-icon v-else :icon="[clone.icon.icon.type, clone.icon.icon.name]" size="2x" />
         </div>
     </div>
@@ -57,6 +57,10 @@ function getIconImage(icon: DraggableIcon) {
         padding: 1rem;
         max-height: 80vh;
         overflow: auto; /* Enables both vertical and horizontal scrolling */
+    }
+    .icon-grid img {
+        width: var(--icon-width);
+        height: var(--icon-height);
     }
 
 
