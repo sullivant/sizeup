@@ -176,10 +176,11 @@ const initMap = () => {
     }
     
     .bounding-map {
-        height: 100%; 
-        width: 100%;
+        height: 300px; 
+        width: 300px;
         border: 1px solid #ccc;
     }
+
 
     .form-container {
         max-width: 400px;
@@ -238,8 +239,10 @@ const initMap = () => {
     }
 
     .bounding-modal {
-        height: 500px;
-        width: 500px;
+        max-height: 90vh;
+        max-width: 90vw;
+        overflow-y: auto;
+        overflow-x: hidden;
         position: fixed;
         top: 50%;
         left: 50%;
@@ -251,4 +254,5 @@ const initMap = () => {
         display: flex;
         flex-direction: column;
     }
+
 </style>

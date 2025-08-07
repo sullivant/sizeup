@@ -9,12 +9,24 @@
     chosenAddress: string;
     }>();
 
-    const emit = defineEmits(['locationChosen']);
+    const emit = defineEmits(['locationChosen', 'activeTab']);
 
     const activeTab = ref<'street' | 'map'>('street');
 
     function onLocationChosen(payload: { lat: number; lng: number; address: string }) {
-    emit('locationChosen', payload);
+        emit('locationChosen', payload);
+    }
+
+    function activateStreet() {
+        console.log("Activating street");
+        activeTab.value = 'street';
+        emit('activeTab', 'street');
+    }
+
+    function activateMap() {
+        console.log("Activating map");
+        activeTab.value = 'map';
+        emit('activeTab', 'map');
     }
 </script>
 
@@ -22,8 +34,8 @@
 <template>
   <div class="main-tabs">
     <div class="tab-buttons">
-      <button @click="activeTab = 'street'" :class="{ active: activeTab === 'street' }">Street View</button>
-      <button @click="activeTab = 'map'" :class="{ active: activeTab === 'map' }">Map View</button>
+      <button @click="activateStreet()" :class="{ active: activeTab === 'street' }">Street View</button>
+      <button @click="activateMap()" :class="{ active: activeTab === 'map' }">Map View</button>
     </div>
     <div class="tab-content">
         <div class="tab-content" v-show="activeTab === 'street'">

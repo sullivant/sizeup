@@ -16,11 +16,18 @@
     
     const chosenAddress = ref('')
     const chosenLatLng = ref<{ lat: number; lng: number } | null>(null)
+    const streetViewActive = ref(true)
 
 
     function handleLocationChosen(payload: { lat: number; lng: number; address: string }) {
         chosenAddress.value = payload.address
         chosenLatLng.value = { lat: payload.lat, lng: payload.lng }
+    }
+
+    function handleActiveTab(payload: string) {
+       
+        streetViewActive.value = (payload === 'street');
+        console.log("Streetview active:"+streetViewActive.value);
     }
 
     const props = defineProps<{
@@ -48,6 +55,7 @@
                 :chosenLatLng="chosenLatLng"
                 :chosenAddress="chosenAddress"
                 @locationChosen="handleLocationChosen"
+                @activeTab="handleActiveTab"
             />
 
         </div>
@@ -72,7 +80,7 @@
                 <div class="side-item">
                     <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/> Icons</div>
                     <div class="scrollable-container">
-                        <IconContainer />
+                        <IconContainer :street-view-active="streetViewActive"/>
                     </div>
                 </div>
             </div>

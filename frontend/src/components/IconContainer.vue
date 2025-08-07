@@ -4,6 +4,10 @@
 
     import iconData from '@/data/icons.json';
 
+    const props = defineProps<{
+        streetViewActive: boolean
+    }>();
+
     const icons = ref<DraggableIcon[]>(iconData);
 
     interface Clone {
@@ -116,7 +120,7 @@
             <!-- <font-awesome-icon v-else :icon="[icon.icon.type, icon.icon.name]" size="2x"  :class="icon.icon.action" /> -->
         </div>
 
-        <div
+        <div v-show="props.streetViewActive"
             v-for="(clone, index) in clones" :key="clone.id" class="icon-clone"
             :style="{ top: clone.y + 'px', left: clone.x + 'px' }"
             @contextmenu.prevent="removeClone(index)"

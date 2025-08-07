@@ -132,8 +132,8 @@ const emit = defineEmits<{
     }
 
     .settings-modal, .info-modal {
-        height: 25%;
-        width: 30%;
+        height: auto;
+        width: auto;
         position: fixed;
         top: 50%;
         left: 50%;

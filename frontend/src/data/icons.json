@@ -6,7 +6,7 @@
     {"id": 4, "icon": {"type": "svg", "name": "dark-smoke.svg", "action": "wiggle"} },
     {"id": 5, "icon": {"type": "svg", "name": "explosion.svg", "action": "fuzz"} },
     {"id": 6, "icon": {"type": "svg", "name": "hole.svg"} },
-    {"id": 7, "icon": {"type": "svg", "name": "electric.svg"} },
+    {"id": 7, "icon": {"type": "svg", "name": "electric.svg", "action": "wiggle"} },
     {"id": 8, "icon": {"type": "svg", "name": "hydrant.svg"} },    
     {"id": 9, "icon": {"type": "svg", "name": "barrier.svg"} },    
     {"id": 10, "icon": {"type": "svg", "name": "ladder.svg"} },
