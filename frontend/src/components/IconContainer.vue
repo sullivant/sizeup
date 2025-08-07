@@ -11,6 +11,8 @@
         icon: DraggableIcon;
         x: number;
         y: number;
+        width: number;
+        height: number;
     }
 
     function getIconImage(icon: DraggableIcon) {
@@ -20,6 +22,9 @@
     const clones = reactive<Clone[]>([]);
     let cloneId = 0;
     const draggingCloneIndex = ref<number | null>(null);
+    const resizingCloneIndex = ref<number | null>(null);
+    const initialMouse = ref<{ x: number; y: number } | null>(null);
+
 
 
     const startClone = (icon: DraggableIcon, event: MouseEvent) => {
@@ -29,6 +34,8 @@
             icon,
             x: event.clientX,
             y: event.clientY,
+            width: 64,
+            height: 64
         };
         clones.push(newClone);
         draggingCloneIndex.value = clones.length - 1;
@@ -51,8 +58,12 @@
     }
 
     const removeClone = (index: number) => {
+        if (resizingCloneIndex.value === index) {
+            stopResize();
+        }
         clones.splice(index, 1);
     };
+
 
     const startCloneDrag = (index: number, event: MouseEvent) => {
         event.preventDefault();
@@ -66,16 +77,43 @@
 
 
 
+    const startResize = (index: number, event: MouseEvent) => {
+        resizingCloneIndex.value = index;
+        initialMouse.value = { x: event.clientX, y: event.clientY };
+        document.addEventListener('mousemove', onResizeMove);
+        document.addEventListener('mouseup', stopResize);
+    };
+
+    const onResizeMove = (event: MouseEvent) => {
+        if (resizingCloneIndex.value !== null && initialMouse.value) {
+            const clone = clones[resizingCloneIndex.value];
+            const dx = event.clientX - initialMouse.value.x;
+            const dy = event.clientY - initialMouse.value.y;
+            clone.width = Math.max(20, clone.width + dx);
+            clone.height = Math.max(20, clone.height + dy);
+            initialMouse.value = { x: event.clientX, y: event.clientY };
+        }
+    };
+
+    const stopResize = () => {
+        resizingCloneIndex.value = null;
+        initialMouse.value = null;
+        document.removeEventListener('mousemove', onResizeMove);
+        document.removeEventListener('mouseup', stopResize);
+    };
+
 
 
 
 </script>
 
 <template>
+    <div v-if="resizingCloneIndex !== null" class="resize-overlay"></div>
+
     <div class="icon-grid">
         <div v-for="icon in icons" :key="icon.id" class="icon-cell" @mousedown.left="startClone(icon, $event)">
-            <div v-if="icon.icon.type === 'svg'"><img :src="getIconImage(icon)" :class="icon.icon.action"></div>
-            <font-awesome-icon v-else :icon="[icon.icon.type, icon.icon.name]" size="2x"  :class="icon.icon.action" />
+            <div v-if="icon.icon.type === 'svg'"><img :src="getIconImage(icon)" :class="icon.icon.action" class="icon-orig"></div>
+            <!-- <font-awesome-icon v-else :icon="[icon.icon.type, icon.icon.name]" size="2x"  :class="icon.icon.action" /> -->
         </div>
 
         <div
@@ -83,8 +121,13 @@
             :style="{ top: clone.y + 'px', left: clone.x + 'px' }"
             @contextmenu.prevent="removeClone(index)"
             @mousedown.left="(event: any) => startCloneDrag(index, event)">
-            <div v-if="clone.icon.icon.type === 'svg'"><img :src="getIconImage(clone.icon)" :class="clone.icon.icon.action" ></div>
-            <font-awesome-icon v-else :icon="[clone.icon.icon.type, clone.icon.icon.name]" size="2x" />
+            <div v-if="clone.icon.icon.type === 'svg'"><img :src="getIconImage(clone.icon)" :class="clone.icon.icon.action" :width="clone.width" :heigh="clone.height" ></div>
+            <!-- <font-awesome-icon v-else :icon="[clone.icon.icon.type, clone.icon.icon.name]" size="2x" /> -->
+
+            <div
+                class="resize-handle"
+                @mousedown.stop.prevent="startResize(index, $event)"
+            ></div>
         </div>
     </div>
 </template>
@@ -102,7 +145,9 @@
         max-height: 80vh;
         overflow: auto; /* Enables both vertical and horizontal scrolling */
     }
-    .icon-grid img {
+
+
+    .icon-orig {
         width: var(--icon-width);
         height: var(--icon-height);
     }
@@ -131,6 +176,30 @@
         user-select: none;
         color: rgb(174, 106, 106);
     }
+
+    .resize-handle {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 12px;
+        height: 12px;
+        background: #555;
+        border: 2px solid white;
+        border-radius: 50%;
+        cursor: nwse-resize;
+        z-index: 10;
+    }
+    .resize-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+        cursor: nwse-resize;
+    }
+
+
 
     @media (max-width: 768px) {
         .icon-grid {
