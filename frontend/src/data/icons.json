@@ -1,17 +1,17 @@
 [
-    {"id": 1, "icon": {"type": "far", "name": "truck"} },
-    {"id": 2, "icon": {"type": "fas", "name": "truck"} },
-    {"id": 3, "icon": {"type": "fas", "name": "car"} },
-    {"id": 4, "icon": {"type": "fas", "name": "fire"} },
-    {"id": 5, "icon": {"type": "fas", "name": "road-barrier"} },
-    {"id": 6, "icon": {"type": "fas", "name": "smog"} },
-    {"id": 7, "icon": {"type": "far", "name": "cloud"} },
-    {"id": 8, "icon": {"type": "fas", "name": "fire-extinguisher"} },
-    {"id": 9, "icon": {"type": "fas", "name": "person"} },
-    {"id": 10, "icon": {"type": "fas", "name": "water"} },
-    {"id": 11, "icon": {"type": "fas", "name": "map-pin"} },
-    {"id": 12, "icon": {"type": "fas", "name": "bolt-lightning"} },
-    {"id": 13, "icon": {"type": "fas", "name": "tornado"} },
-    {"id": 14, "icon": {"type": "far", "name": "lightbulb"} },
-    {"id": 15, "icon": {"type": "fas", "name": "exclamation"} }
+
+    {"id": 4, "icon": {"type": "gif", "name": "fire.svg", "action": "fire-effect"} },
+    {"id": 22, "icon": {"type": "fas", "name": "truck"} },
+    {"id": 23, "icon": {"type": "fas", "name": "car"} },
+    {"id": 25, "icon": {"type": "fas", "name": "road-barrier"} },
+    {"id": 26, "icon": {"type": "fas", "name": "smog"} },
+    {"id": 27, "icon": {"type": "far", "name": "cloud", "action": "wiggle"} },
+    {"id": 28, "icon": {"type": "fas", "name": "fire-extinguisher"} },
+    {"id": 29, "icon": {"type": "fas", "name": "person"} },
+    {"id": 30, "icon": {"type": "fas", "name": "water"} },
+    {"id": 31, "icon": {"type": "fas", "name": "map-pin"} },
+    {"id": 32, "icon": {"type": "fas", "name": "bolt-lightning"} },
+    {"id": 33, "icon": {"type": "fas", "name": "tornado"} },
+    {"id": 34, "icon": {"type": "far", "name": "lightbulb"} },
+    {"id": 35, "icon": {"type": "fas", "name": "exclamation"} }
 ]

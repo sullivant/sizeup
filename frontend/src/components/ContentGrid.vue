@@ -61,18 +61,10 @@
                 </div>
             </div>
             <div class="right-row">
-                <div class="side-by-side">
-                    <div class="side-item">
-                        <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Features</div>
-                        <div class="scrollable-container">
-                            <ScenarioItems :scenario-toggles="scenarioToggles"/>
-                        </div>
-                    </div>
-                    <div class="side-item">
-                        <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/> Apparatus</div>
-                        <div class="scrollable-container">
-                            <ApparatusList :apparatus="apparatus"/>
-                        </div>
+                <div class="side-item">
+                    <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Features</div>
+                    <div class="scrollable-container">
+                        <ScenarioItems :scenario-toggles="scenarioToggles"/>
                     </div>
                 </div>
             </div>
@@ -138,7 +130,8 @@
     .side-item {
         display: flex;
         flex-direction: column;
-        overflow: hidden;
+        overflow: auto;
+        max-height: 100%;
         background-color: var(--color-base-100);
         border: var(--border) solid #ccc;
         border-radius: var(--radius-box);
@@ -158,6 +151,7 @@
     .scrollable-container {
         flex: 1; 
         overflow-y: auto;
+        overflow-x: auto;
         border: none;
     }   
 
