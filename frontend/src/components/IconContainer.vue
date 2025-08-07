@@ -141,6 +141,33 @@ function getIconImage(icon: DraggableIcon) {
         transform-origin: center;
     }
 
+    @keyframes verticalWave {
+    0% {
+        transform: translateY(0) scaleY(1);
+        opacity: 1;
+    }
+    25% {
+        transform: translateY(-2px) scaleY(1.05);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateY(-4px) scaleY(0.95);
+        opacity: 0.85;
+    }
+    75% {
+        transform: translateY(-2px) scaleY(1.02);
+        opacity: 0.95;
+    }
+    100% {
+        transform: translateY(0) scaleY(1);
+        opacity: 1;
+    }
+    }
+
+    .fuzz {
+        animation: verticalWave 0.8s infinite ease-in-out;
+        transform-origin: center;
+    }
 
 
 </style>

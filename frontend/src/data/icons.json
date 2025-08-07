@@ -1,9 +1,10 @@
 [
 
-    {"id": 1, "icon": {"type": "svg", "name": "fire.svg", "action": "fire-effect"} },
+    {"id": 1, "icon": {"type": "svg", "name": "fire.svg", "action": "fuzz"} },
     {"id": 2, "icon": {"type": "svg", "name": "alarm-bell.svg", "action": "wiggle"} },
-    {"id": 3, "icon": {"type": "svg", "name": "smoke.svg", "action": "wiggle"} },
+    {"id": 3, "icon": {"type": "svg", "name": "smoke.svg", "action": "fuzz"} },
     {"id": 4, "icon": {"type": "svg", "name": "dark-smoke.svg", "action": "wiggle"} },
+    {"id": 5, "icon": {"type": "svg", "name": "person-injured.svg", "action": "pulse"} },
 
 
 
