@@ -2,8 +2,8 @@
 
     {"id": 1, "icon": {"type": "svg", "name": "fire.svg", "action": "fuzz"} },
     {"id": 2, "icon": {"type": "svg", "name": "alarm-pull.svg"} },
-    {"id": 3, "icon": {"type": "svg", "name": "smoke.svg", "action": "fuzz"} },
-    {"id": 4, "icon": {"type": "svg", "name": "dark-smoke.svg", "action": "wiggle"} },
+    {"id": 3, "icon": {"type": "svg", "name": "smoke.svg"} },
+    {"id": 4, "icon": {"type": "svg", "name": "dark-smoke.svg"} },
     {"id": 5, "icon": {"type": "svg", "name": "explosion.svg", "action": "fuzz"} },
     {"id": 6, "icon": {"type": "svg", "name": "hole.svg"} },
     {"id": 7, "icon": {"type": "svg", "name": "electric.svg", "action": "wiggle"} },

@@ -67,12 +67,12 @@ const initMap = () => {
 
         // Normalize bounds to ensure NE is top-right and SW is bottom-left
         const ne = {
-        lat: Math.max(bounds.value.northeast.lat, bounds.value.southwest.lat),
-        lng: Math.max(bounds.value.northeast.lng, bounds.value.southwest.lng),
+            lat: Math.max(bounds.value.northeast.lat, bounds.value.southwest.lat),
+            lng: Math.max(bounds.value.northeast.lng, bounds.value.southwest.lng),
         };
         const sw = {
-        lat: Math.min(bounds.value.northeast.lat, bounds.value.southwest.lat),
-        lng: Math.min(bounds.value.northeast.lng, bounds.value.southwest.lng),
+            lat: Math.min(bounds.value.northeast.lat, bounds.value.southwest.lat),
+            lng: Math.min(bounds.value.northeast.lng, bounds.value.southwest.lng),
         };
 
         // Save to settings
@@ -81,18 +81,18 @@ const initMap = () => {
 
         // Remove previous rectangle if it exists
         if (rectangle.value) {
-        rectangle.value.setMap(null);
+            rectangle.value.setMap(null);
         }
 
         // Draw new rectangle
         rectangle.value = new google.maps.Rectangle({
-        bounds: new google.maps.LatLngBounds(sw, ne),
-        strokeColor: '#bdc9a9',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#bdc9a9',
-        fillOpacity: 0.35,
-        map: map.value,
+            bounds: new google.maps.LatLngBounds(sw, ne),
+            strokeColor: '#bdc9a9',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#bdc9a9',
+            fillOpacity: 0.35,
+            map: map.value,
         });
 
         clickCount.value = 0;
@@ -106,7 +106,7 @@ const initMap = () => {
 
 <template>
     <div class="settings-content">
-        <div class="settings-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Settings..</div>
+        <div class="settings-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Settings</div>
 
         <div class="settings-form">
             <form @submit.prevent="handleSubmit">
@@ -115,16 +115,7 @@ const initMap = () => {
                     <input id="initialChosen" type="text" v-model.number="props.settings.initialFeatures" placeholder=props.settings.initialFeatures></input>
                 </div>
 
-                <div class="form-group">
-                    <label for="ne">Northeast:</label>
-                    <input id="nelat" type="text" v-model.number="props.settings.location.northeast.lat" placeholder=props.settings.location.northeast.lat></input>,
-                    <input id="nelng" type="text" v-model.number="props.settings.location.northeast.lng" placeholder=props.settings.location.northeast.lng></input>
-                </div>
-                <div class="form-group">
-                    <label for="sw">Southwest:</label>
-                    <input id="swlat" type="text" v-model.number="props.settings.location.southwest.lat" placeholder=props.settings.location.southwest.lat></input>,
-                    <input id="swlng" type="text" v-model.number="props.settings.location.southwest.lng" placeholder=props.settings.location.southwest.lng></input>
-                </div>
+
                 <div class="form-group">
                     <div @click="openModal">Set Bounding Box</div>
                 </div>
@@ -134,9 +125,6 @@ const initMap = () => {
                 </div>
             </form>
         </div>
-
-
-
     </div>
 
 
@@ -161,6 +149,8 @@ const initMap = () => {
     .settings-form {
         border: 1px solid #ccc;
         border-top: none;
+        padding-right: 10px;
+        padding-bottom: 10px;
         color: var(--color-base-content);
         background-color: var(--color-base-100);
     }
@@ -214,7 +204,7 @@ const initMap = () => {
         border-radius: 4px;
         font-size: 14px;
         margin-left: 10px;
-        width: 10ch;
+        width: 5ch;
     }
     
     .button-container {

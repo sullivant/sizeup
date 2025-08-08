@@ -43,7 +43,7 @@
     <main class="grid-container">
         <div class="main-item">
             <!-- <StreetView :settings="props.settings"  @locationChosen="handleLocationChosen"/> -->
-            <div class="address">
+            <div class="address-media"> <!-- Used when in mobile mode, etc -->
                 <div class="scrollable-container">
                 <div class="side-header"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
                 <ScenarioEnvironment :scenario-environment="scenarioEnvironment"/>
@@ -182,7 +182,10 @@
         height: 100%;
     }
 
-    .address {
+    .address-media {
+        display: none;
+    }
+    .sizeup-media {
         display: none;
     }
 
@@ -196,13 +199,13 @@
             display: none !important;
         }
 
-        .address {
+        .address-media {
             background-color: var(--color-base-100);
             border: var(--border) solid #ccc;
             border-radius: var(--radius-box);            
             display: flex;
             flex-direction: column;
-            min-height: 0;
+            min-height: auto;
         }
     }
 
