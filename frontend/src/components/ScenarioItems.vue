@@ -39,4 +39,9 @@
         list-style: none;
         padding-left: 1em;
     }
+    .scrollable-container li {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 </style>

@@ -37,19 +37,31 @@
         settings: AppSettings
     }>();
 
+
+    function filteredScenarios() : ScenarioItem[] {
+        return props.scenarioToggles.filter((t) => t.enabled);
+    }
 </script>
 
 <template>
     <main class="grid-container">
         <div class="main-item">
             <!-- <StreetView :settings="props.settings"  @locationChosen="handleLocationChosen"/> -->
-            <div class="address-media"> <!-- Used when in mobile mode, etc -->
-                <div class="scrollable-container">
-                <div class="side-header"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
-                <ScenarioEnvironment :scenario-environment="scenarioEnvironment"/>
+            <div class="media-container"> <!-- Used when in mobile/media mode, etc. -->
+                <div class="address-media"> <!-- Used when in mobile mode, etc -->
+                    <div class="scrollable-container">
+                    <div class="side-header"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
+                    <ScenarioEnvironment :scenario-environment="scenarioEnvironment"/>
+                    </div>
+                </div>
+                <div class="sizeup-media"> <!-- Used when in mobile mode, etc -->
+                    <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Size Up</div>
+                    <div class="scrollable-container">
+                        <ScenarioItems :scenario-toggles="filteredScenarios()"/>
+                    </div>
                 </div>
             </div>
-            
+
             <MainTabs
                 :settings="props.settings"
                 :chosenLatLng="chosenLatLng"
@@ -63,16 +75,16 @@
             <div class="right-row">
                 <div class="side-item">
                     <div class="scrollable-container">
-                    <div class="side-header"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
+                    <div class="side-header address"><font-awesome-icon :icon='"far fa-map"'/>{{ chosenAddress }}</div>
                     <ScenarioEnvironment :scenario-environment="scenarioEnvironment"/>
                     </div>
                 </div>
             </div>
             <div class="right-row">
                 <div class="side-item">
-                    <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Features</div>
+                    <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Size Up</div>
                     <div class="scrollable-container">
-                        <ScenarioItems :scenario-toggles="scenarioToggles"/>
+                        <ScenarioItems :scenario-toggles="scenarioToggles" />
                     </div>
                 </div>
             </div>
@@ -182,11 +194,19 @@
         height: 100%;
     }
 
+    .media-container {
+        display: none;
+    }
     .address-media {
         display: none;
     }
     .sizeup-media {
         display: none;
+    }
+    .address {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     @media (max-width: 896px) {
@@ -199,14 +219,30 @@
             display: none !important;
         }
 
-        .address-media {
+        .media-container {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+        }
+
+        .address-media, .sizeup-media {
             background-color: var(--color-base-100);
             border: var(--border) solid #ccc;
             border-radius: var(--radius-box);            
             display: flex;
             flex-direction: column;
             min-height: auto;
+            width: 50%;
         }
+
+
+        .address-media .side-header {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+
     }
 
 
