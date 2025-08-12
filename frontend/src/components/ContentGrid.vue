@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import {ref, defineProps, onMounted } from 'vue';
+    import {ref, defineProps, onMounted, watch } from 'vue';
 
     import ScenarioItems from '@/components/ScenarioDispatch.vue';
     import ScenarioArrival from '@/components/ScenarioArrival.vue';
@@ -16,6 +16,8 @@
     const chosenLatLng = ref<{ lat: number; lng: number } | null>(null)
     const streetViewActive = ref(true)
     const onScene = ref(false)
+    const itemsDispatched = ref<ScenarioItem[]>([])
+    const itemsArrival = ref<ScenarioItem[]>([])
 
     function handleLocationChosen(payload: { lat: number; lng: number; address: string }) {
         chosenAddress.value = payload.address
@@ -31,6 +33,21 @@
         onScene.value = true
     }
 
+    function resetDispatch() {
+        itemsDispatched.value = randomlyEnable([...props.scenarioDispatch], props.settings.enabledDispatch);
+    }
+
+    function resetArrival() {
+        itemsArrival.value = randomlyEnable([...props.scenarioOnScene], props.settings.enabledOnScene);
+    }
+
+    function randomlyEnable(items: ScenarioItem[], enableCount: number): ScenarioItem[] {
+        const shuffled = [...items].sort(() => Math.random() - 0.5)
+        return shuffled.map((item, index) => ({
+            ...item, enabled: index < enableCount
+        }))
+    }
+    
     const props = defineProps<{
         scenarioDispatch: ScenarioItem[]
         scenarioOnScene: ScenarioItem[]
@@ -38,6 +55,21 @@
         apparatus: Apparatus[]
         settings: AppSettings
     }>();
+    
+    watch(
+        () => props.scenarioDispatch,
+            (newVal) => {
+                itemsDispatched.value = newVal;
+            },
+            { immediate: true }
+    );
+     watch(
+        () => props.scenarioOnScene,
+            (newVal) => {
+                itemsArrival.value = newVal;
+            },
+            { immediate: true }
+    );
 
 </script>
 
@@ -53,9 +85,10 @@
                     </div>
                 </div>
                 <div class="sizeup-media"> <!-- Used when in mobile mode, etc -->
-                    <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Size Up</div>
+                    <div class="side-header resettable"><div><font-awesome-icon :icon='"far fa-rectangle-list"'/> Size Up</div><div @click="resetDispatch"><font-awesome-icon :icon='"fas fa-recycle"'/></div></div>
+                    
                     <div class="scrollable-container">
-                        <ScenarioItems :scenario-toggles="scenarioDispatch"/>
+                        <ScenarioItems :scenario-toggles="itemsDispatched"/>
                     </div>
                 </div>
             </div>
@@ -89,17 +122,17 @@
             </div>               
             <div class="right-row">
                 <div class="side-item">
-                    <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Size Up</div>
+                    <div class="side-header resettable"><div><font-awesome-icon :icon='"far fa-rectangle-list"'/> Size Up</div><div @click="resetDispatch"><font-awesome-icon :icon='"fas fa-recycle"'/></div></div>
                     <div class="scrollable-container">
-                        <ScenarioItems :scenario-toggles="scenarioDispatch" />
+                        <ScenarioItems :scenario-toggles="itemsDispatched" />
                     </div>
                 </div>
             </div>
             <div class="right-row">
                 <div class="side-item">
-                    <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Found On Scene</div>
+                    <div class="side-header resettable"><div><font-awesome-icon :icon='"far fa-rectangle-list"'/> Found On Scene</div><div @click="resetArrival"><font-awesome-icon :icon='"fas fa-recycle"'/></div></div>
                     <div class="scrollable-container">
-                        <ScenarioArrival :scenario-toggles="scenarioOnScene" />
+                        <ScenarioArrival :scenario-toggles="itemsArrival" />
                     </div>
                 </div>
             </div>            
@@ -167,7 +200,6 @@
     }
     .side-header {
         padding: 0.5rem 1rem;
-        font-weight: bold;
         background-color: var(--color-base-300);
         color: var(--color-base-content);
         flex-shrink: 0;
@@ -175,6 +207,12 @@
         border-top-left-radius: var(--radius-box);
         border-top-right-radius: var(--radius-box);
         border-bottom: var(--border) solid #ddd;
+    }
+    .resettable {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        white-space: nowrap;
     }
 
     .scrollable-container {

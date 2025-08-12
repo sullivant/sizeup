@@ -7,7 +7,7 @@ import App from './App.vue'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSun, faMoon, faCloudShowersHeavy, faCloudBolt, faSmog, faBed,
-    faFire, faTruck as fasTruck, faCar, faRoadBarrier, faFireExtinguisher,
+    faFire, faTruck as fasTruck, faCar, faRoadBarrier, faFireExtinguisher, faRecycle,
     faPerson, faWater, faExclamation, faBoltLightning, faMapPin, faTornado, faGears,
     
 } from '@fortawesome/free-solid-svg-icons';
@@ -25,7 +25,7 @@ library.add(faSun, farSun, faMoon, faSquare, faSquareCheck, faSnowflake,
     faCalendarDays, faTruck, fasTruck, faRectangleList, faLifeRing, 
     faFire, faCar, faRoadBarrier, faCloud, faFireExtinguisher, faPerson,
     faWater, faExclamation, faLightbulb, faBoltLightning, faMapPin,
-    faTornado, faMap, faGears, faCircleQuestion, faGithub
+    faTornado, faMap, faGears, faCircleQuestion, faGithub, faRecycle
 );
 
 
