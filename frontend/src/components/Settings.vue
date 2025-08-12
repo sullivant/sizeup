@@ -112,7 +112,7 @@ const initMap = () => {
             <form @submit.prevent="handleSubmit">
                 <div class="form-group">
                     <label for="initialChosen">Initial Feature Count:</label>
-                    <input id="initialChosen" type="text" v-model.number="props.settings.initialFeatures" placeholder=props.settings.initialFeatures></input>
+                    <input id="initialChosen" type="text" v-model.number="props.settings.enabledDispatch" placeholder=props.settings.initialFeatures></input>
                 </div>
 
 

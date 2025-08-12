@@ -1,13 +1,11 @@
 <script setup lang="ts">
     import {ref, defineProps, onMounted } from 'vue';
 
-    import ScenarioItems from '@/components/ScenarioItems.vue'
+    import ScenarioItems from '@/components/ScenarioDispatch.vue';
+    import ScenarioArrival from '@/components/ScenarioArrival.vue';
     import ScenarioEnvironment from '@/components/ScenarioEnvironment.vue';
-    import ApparatusList from '@/components/ApparatusList.vue';
-    import StreetView from '@/components/StreetView.vue';
-    import MapView from '@/components/MapView.vue';
-    import IconContainer from '@/components/IconContainer.vue';
     import MainTabs from '@/components/MainTabs.vue';
+    import ScenarioControl from '@/components/ScenarioControl.vue';
 
     import type { ScenarioItem } from '@/types/ScenarioItem'
     import type { ScenarioEnvironment as typeScenarioEnvironment } from '@/types/typeScenarioEnvironment';
@@ -17,7 +15,7 @@
     const chosenAddress = ref('')
     const chosenLatLng = ref<{ lat: number; lng: number } | null>(null)
     const streetViewActive = ref(true)
-
+    const onScene = ref(false)
 
     function handleLocationChosen(payload: { lat: number; lng: number; address: string }) {
         chosenAddress.value = payload.address
@@ -25,22 +23,22 @@
     }
 
     function handleActiveTab(payload: string) {
-       
         streetViewActive.value = (payload === 'street');
         console.log("Streetview active:"+streetViewActive.value);
     }
 
+    function handleOnScene() {
+        onScene.value = true
+    }
+
     const props = defineProps<{
-        scenarioToggles: ScenarioItem[]
+        scenarioDispatch: ScenarioItem[]
+        scenarioOnScene: ScenarioItem[]
         scenarioEnvironment: typeScenarioEnvironment
         apparatus: Apparatus[]
         settings: AppSettings
     }>();
 
-
-    function filteredScenarios() : ScenarioItem[] {
-        return props.scenarioToggles.filter((t) => t.enabled);
-    }
 </script>
 
 <template>
@@ -57,7 +55,7 @@
                 <div class="sizeup-media"> <!-- Used when in mobile mode, etc -->
                     <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Size Up</div>
                     <div class="scrollable-container">
-                        <ScenarioItems :scenario-toggles="filteredScenarios()"/>
+                        <ScenarioItems :scenario-toggles="scenarioDispatch"/>
                     </div>
                 </div>
             </div>
@@ -82,20 +80,30 @@
             </div>
             <div class="right-row">
                 <div class="side-item">
+                    <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/> Control</div>
+                    <div class="scrollable-container">
+                        On Scene: {{ onScene }}
+                        <ScenarioControl @update-on-scene="handleOnScene"/>
+                    </div>
+                </div>        
+            </div>               
+            <div class="right-row">
+                <div class="side-item">
                     <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Size Up</div>
                     <div class="scrollable-container">
-                        <ScenarioItems :scenario-toggles="scenarioToggles" />
+                        <ScenarioItems :scenario-toggles="scenarioDispatch" />
                     </div>
                 </div>
             </div>
             <div class="right-row">
                 <div class="side-item">
-                    <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/> Icons</div>
+                    <div class="side-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Found On Scene</div>
                     <div class="scrollable-container">
-                        <IconContainer :street-view-active="streetViewActive"/>
+                        <ScenarioArrival :scenario-toggles="scenarioOnScene" />
                     </div>
                 </div>
-            </div>
+            </div>            
+ 
         </div>
     </main>
 

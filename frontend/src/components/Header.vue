@@ -51,7 +51,7 @@ const menuItems: MenuItem[] = [
 ]
 
 function handleSettingsUpdate(newSettings: AppSettings) {
-    console.log("header emitting settings:"+newSettings.initialFeatures);
+    console.log("header emitting settings:"+newSettings.enabledDispatch);
     emit('update-settings', newSettings);
 }
 

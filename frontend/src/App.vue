@@ -1,10 +1,10 @@
 <script setup lang="ts">
-    import { ref, onMounted } from 'vue'
+    import { ref, onMounted, computed } from 'vue'
     import Header from './components/Header.vue'
     import ContentGrid from './components/ContentGrid.vue'
 
     import appSettingsData from '@/data/appSettings.json'
-    import scenarioData from '@/data/scenarioToggles.json'
+    import scenarioData from '@/data/scenarioItems.json'
     import apparatusData from '@/data/apparatus.json'
 
     import type { AppSettings } from '@/types/AppSettings'
@@ -45,16 +45,20 @@
     // The application's list of scenario features that can be used when discussing
     // response to the incident, etc.  This is stored in the scenarioToggles.json file.
     // It is first enabled randomly and then setup after mount (onMounted below)
-    const scenarioToggles = ref<ScenarioItem[]>([]);
+
+    // These items are found "at dispatch"
+    const scenarioDispatch = ref<ScenarioItem[]>([]);
+    // These items are found "on scene" arrival
+    const scenarioOnScene = ref<ScenarioItem[]>([]);
 
     // The application's current (randomly generated) weather and environment detail
     const scenarioEnvironment = ref<typeScenarioEnvironment>(generateRandomEnvironment());
 
-    // After we have the full list of toggles, we'll randomly enable six.
-    function randomlyEnable(items: ScenarioItem[]): ScenarioItem[] {
+    // After we have the full list of toggles, we'll randomly enable some, based on settings.
+    function randomlyEnable(items: ScenarioItem[], enableCount: number): ScenarioItem[] {
         const shuffled = [...items].sort(() => Math.random() - 0.5)
         return shuffled.map((item, index) => ({
-            ...item, enabled: index < appSettings.value.initialFeatures
+            ...item, enabled: index < enableCount
         }))
     }
 
@@ -80,6 +84,12 @@
         }
     }
 
+    // Ensure what gets sent to each type of scenario info panel (dispatch and arrival) is filtered
+    // by type of panel.
+    function filterScenarios(allItems: ScenarioItem[], type: string): ScenarioItem[] {
+        return allItems.filter((s) => s.timing === type);
+    }
+
     onMounted(() => {
         let storedSettings = loadSettingsFromSession();
         if (storedSettings) {
@@ -88,15 +98,15 @@
             appSettings.value = appSettingsData; // The default.
         }
 
-        scenarioToggles.value = randomlyEnable(scenarioData);
-
+        scenarioDispatch.value = randomlyEnable(filterScenarios(scenarioData, 'Dispatch'), appSettings.value.enabledDispatch);
+        scenarioOnScene.value = randomlyEnable(filterScenarios(scenarioData, 'Arrival'), appSettings.value.enabledOnScene);
     })
 </script>
 
 <template>
     <div class="app-container">
         <Header :key="settingsVersion" :settings="appSettings" @update-settings="handleChangeToSettings" :settings-version="settingsVersion"/>
-        <ContentGrid :settings="appSettings" :scenario-toggles="scenarioToggles" :scenario-environment="scenarioEnvironment" :apparatus="apparatus" />
+        <ContentGrid :settings="appSettings" :scenarioDispatch="scenarioDispatch" :scenario-on-scene="scenarioOnScene" :scenario-environment="scenarioEnvironment" :apparatus="apparatus" />
     </div>
 </template>
 
