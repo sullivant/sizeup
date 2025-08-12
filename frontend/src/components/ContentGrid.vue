@@ -115,7 +115,6 @@
                 <div class="side-item">
                     <div class="side-header"><font-awesome-icon :icon='"far fa-truck"'/> Control</div>
                     <div class="scrollable-container">
-                        On Scene: {{ onScene }}
                         <ScenarioControl @update-on-scene="handleOnScene"/>
                     </div>
                 </div>        
@@ -132,7 +131,7 @@
                 <div class="side-item">
                     <div class="side-header resettable"><div><font-awesome-icon :icon='"far fa-rectangle-list"'/> Found On Scene</div><div @click="resetArrival"><font-awesome-icon :icon='"fas fa-recycle"'/></div></div>
                     <div class="scrollable-container">
-                        <ScenarioArrival :scenario-toggles="itemsArrival" />
+                        <ScenarioArrival :scenario-toggles="itemsArrival" :on-scene="onScene" />
                     </div>
                 </div>
             </div>            

@@ -5,6 +5,7 @@
 
     const props = defineProps<{
         scenarioToggles: ScenarioItem[]
+        onScene: boolean
     }>();
 
     // // Ensures the enabled toggles show up first
@@ -25,11 +26,16 @@
 </script>
 
 <template>
-    <div class="scenario-grid">
+    <div v-show="onScene" class="scenario-grid">
         <div class="scenario-cell" v-for="item in filteredScenarios" :key="item.id" @click="toggleScenario(item.id)">
             {{ item.shortName }}
         </div>
     </div>
+    <div v-show="!onScene" class="scenario-grid">
+        <div class="scenario-cell">
+            Not Yet On Scene
+        </div>
+    </div>    
 <!-- 
     <ul>
         <li v-for="item in sortedScenarioToggles" :key="item.id" @click="toggleScenario(item.id)">
