@@ -1,6 +1,6 @@
 <script setup lang="ts">
-    import { ref, onMounted, computed } from 'vue'
-    import Header from './components/Header.vue'
+    import { ref, onMounted } from 'vue'
+    import Header from './components/HeaderView.vue'
     import ContentGrid from './components/ContentGrid.vue'
 
     import appSettingsData from '@/data/appSettings.json'
@@ -72,8 +72,8 @@
         const weathers: typeScenarioEnvironment['weather'][] = ['Clear', 'Rain', 'Snow', 'Fog',  'Storm']
         const temperature = Math.floor(Math.random() * 60) + 30 // 20F to 90F
         const randomDate = new Date(
-            2025, 
-            Math.floor(Math.random()*12), 
+            2025,
+            Math.floor(Math.random()*12),
             Math.floor(Math.random() * 28) + 1)
 
         return {

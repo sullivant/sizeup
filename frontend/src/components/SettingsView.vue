@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { AppSettings } from '@/types/AppSettings';
-import { ref, nextTick } from 'vue';
+import { ref, nextTick, onMounted, computed } from 'vue';
+import appSettingsData from '@/data/appSettings.json'
+
 
 const props = defineProps<{
         settings: AppSettings,
@@ -8,7 +10,7 @@ const props = defineProps<{
 }>()
 
 const handleSubmit = () => {
-    emit('update-settings', props.settings);
+    emit('update-settings', localSettings.value);
 }
 
 const emit = defineEmits<{
@@ -20,6 +22,8 @@ const map = ref<google.maps.Map | null>(null);
 const clickCount = ref(0);
 const bounds = ref<{ northeast: google.maps.LatLngLiteral, southwest: google.maps.LatLngLiteral } | null>(null);
 const rectangle = ref<google.maps.Rectangle | null>(null);
+
+const localSettings = ref<AppSettings>(appSettingsData);
 
 
 const openModal = async () => {
@@ -38,6 +42,27 @@ const closeModal = () => {
     }
 };
 
+const enabledDispatch = computed({
+  get: () => localSettings.value.enabledDispatch,
+  set: (val: number) => {
+    localSettings.value.enabledDispatch = val;
+  }
+});
+
+const deptName = computed({
+  get: () => localSettings.value.deptName,
+  set: (val: string) => {
+    localSettings.value.deptName = val;
+  }
+});
+
+
+function updateBounding(ne: { lat: number; lng: number; }, sw: { lat: number; lng: number; }) {
+  if (localSettings.value != undefined) {
+    localSettings.value.location.northeast = ne;
+    localSettings.value.location.southwest = sw;
+  };
+}
 
 
 const initMap = () => {
@@ -76,8 +101,7 @@ const initMap = () => {
         };
 
         // Save to settings
-        props.settings.location.northeast = ne;
-        props.settings.location.southwest = sw;
+        updateBounding(ne, sw);
 
         // Remove previous rectangle if it exists
         if (rectangle.value) {
@@ -101,6 +125,12 @@ const initMap = () => {
 
 };
 
+onMounted(() => {
+  if (props.settings) {
+    localSettings.value = { ...props.settings };
+  }
+});
+
 
 </script>
 
@@ -112,11 +142,11 @@ const initMap = () => {
             <form @submit.prevent="handleSubmit">
                 <div class="form-group">
                     <label for="initialChosen">Initial Feature Count:</label>
-                    <input id="initialChosen" type="text" v-model.number="props.settings.enabledDispatch" placeholder=props.settings.initialFeatures></input>
+                    <input id="initialChosen" type="text" v-model.number="enabledDispatch" placeholder=props.settings.initialFeatures>
                 </div>
                 <div class="form-group">
                     <label for="initialChosen">Department Name:</label>
-                    <input id="initialChosen" type="text" v-model="props.settings.deptName" placeholder=props.settings.deptName></input>
+                    <input id="initialChosen" type="text" v-model="deptName" placeholder=props.settings.deptName>
                 </div>
 
                 <div class="form-group">

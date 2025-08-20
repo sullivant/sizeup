@@ -2,12 +2,11 @@
 import { ref, onMounted } from 'vue'
 import type { MenuItem } from '../types/MenuItem'
 
-import Settings from '@/components/Settings.vue'
+import Settings from '@/components/SettingsView.vue'
 import type { AppSettings } from '@/types/AppSettings';
 
 import Info from '@/components/Info.vue';
 
-import { appVersion } from '@/version';
 
 const props = defineProps<{
         settings: AppSettings,
@@ -22,7 +21,7 @@ const toggleTheme = () => {
 }
 
 onMounted(() => {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: light)').matches 
+    const prefersDark = window.matchMedia('(prefers-color-scheme: light)').matches
 
     console.log("Prefers dark is: "+prefersDark);
 
