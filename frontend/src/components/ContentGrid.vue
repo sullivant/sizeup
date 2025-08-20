@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import {ref, defineProps, onMounted, watch } from 'vue';
+    import {ref, defineProps, watch } from 'vue';
 
     import ScenarioItems from '@/components/ScenarioDispatch.vue';
     import ScenarioArrival from '@/components/ScenarioArrival.vue';
@@ -11,7 +11,7 @@
     import type { ScenarioEnvironment as typeScenarioEnvironment } from '@/types/typeScenarioEnvironment';
     import type { Apparatus } from '@/types/Apparatus';
     import type { AppSettings } from '@/types/AppSettings';
-    
+
     const chosenAddress = ref('')
     const chosenLatLng = ref<{ lat: number; lng: number } | null>(null)
     const streetViewActive = ref(true)
@@ -47,7 +47,7 @@
             ...item, enabled: index < enableCount
         }))
     }
-    
+
     const props = defineProps<{
         scenarioDispatch: ScenarioItem[]
         scenarioOnScene: ScenarioItem[]
@@ -55,7 +55,7 @@
         apparatus: Apparatus[]
         settings: AppSettings
     }>();
-    
+
     watch(
         () => props.scenarioDispatch,
             (newVal) => {
@@ -86,7 +86,7 @@
                 </div>
                 <div class="sizeup-media"> <!-- Used when in mobile mode, etc -->
                     <div class="side-header resettable"><div><font-awesome-icon :icon='"far fa-rectangle-list"'/> Size Up</div><div @click="resetDispatch"><font-awesome-icon :icon='"fas fa-recycle"'/></div></div>
-                    
+
                     <div class="scrollable-container">
                         <ScenarioItems :scenario-toggles="itemsDispatched"/>
                     </div>
@@ -97,6 +97,8 @@
                 :settings="props.settings"
                 :chosenLatLng="chosenLatLng"
                 :chosenAddress="chosenAddress"
+                :on-scene="onScene"
+                :scenario-dispatch="itemsDispatched"
                 @locationChosen="handleLocationChosen"
                 @activeTab="handleActiveTab"
             />
@@ -117,8 +119,8 @@
                     <div class="scrollable-container">
                         <ScenarioControl @update-on-scene="handleOnScene"/>
                     </div>
-                </div>        
-            </div>               
+                </div>
+            </div>
             <div class="right-row">
                 <div class="side-item">
                     <div class="side-header resettable"><div><font-awesome-icon :icon='"far fa-rectangle-list"'/> Size Up</div><div @click="resetDispatch"><font-awesome-icon :icon='"fas fa-recycle"'/></div></div>
@@ -134,8 +136,8 @@
                         <ScenarioArrival :scenario-toggles="itemsArrival" :on-scene="onScene" />
                     </div>
                 </div>
-            </div>            
- 
+            </div>
+
         </div>
     </main>
 
@@ -163,7 +165,7 @@
         width: 75%;
         min-width: 75%;
         height: 100%;
-    
+
     }
     .right-column {
         display: grid;
@@ -215,11 +217,11 @@
     }
 
     .scrollable-container {
-        flex: 1; 
+        flex: 1;
         overflow-y: auto;
         overflow-x: auto;
         border: none;
-    }   
+    }
 
     .scrollable-container ul {
         list-style: none;
@@ -273,7 +275,7 @@
         .address-media, .sizeup-media {
             background-color: var(--color-base-100);
             border: var(--border) solid #ccc;
-            border-radius: var(--radius-box);            
+            border-radius: var(--radius-box);
             display: flex;
             flex-direction: column;
             min-height: auto;

@@ -1,12 +1,18 @@
+<!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <script setup lang="ts">
     import { ref } from 'vue';
     import StreetView from '@/components/StreetView.vue';
     import MapView from '@/components/MapView.vue';
+    import DispatchView from '@/components/DispatchView.vue';
+    import type { AppSettings } from '@/types/AppSettings';
+    import type { ScenarioItem } from '@/types/ScenarioItem';
 
     const props = defineProps<{
-    settings: any;
-    chosenLatLng: { lat: number; lng: number } | null;
-    chosenAddress: string;
+      settings: AppSettings;
+      chosenLatLng: { lat: number; lng: number } | null;
+      chosenAddress: string;
+      onScene: boolean;
+      scenarioDispatch: ScenarioItem[];
     }>();
 
     const emit = defineEmits(['locationChosen', 'activeTab']);
@@ -38,12 +44,15 @@
       <button @click="activateMap()" :class="{ active: activeTab === 'map' }">Map View</button>
     </div>
     <div class="tab-content">
-        <div class="tab-content" v-show="activeTab === 'street'">
+        <div class="tab-content" v-show="!props.onScene">
+            <DispatchView :address="chosenAddress" :scenarioDispatch="scenarioDispatch"/>
+        </div>
+        <div class="tab-content" v-show="activeTab === 'street' && props.onScene">
             <StreetView
                 :settings="settings"
                 @locationChosen="onLocationChosen"/>
         </div>
-        <div class="tab-content" v-show="activeTab === 'map'">
+        <div class="tab-content" v-show="activeTab === 'map' && props.onScene">
             <MapView
                 v-if="chosenLatLng"
                 :lat="chosenLatLng.lat"
