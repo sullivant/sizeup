@@ -1,12 +1,14 @@
 <script setup lang="ts">
   import { ref, computed, watch } from 'vue';
   import type { ScenarioItem } from '@/types/ScenarioItem';
+import type { AppSettings } from '@/types/AppSettings';
 
   const emit = defineEmits(['onScene']);
 
   const props = defineProps<{
-      address: string;
-      scenarioDispatch: ScenarioItem[];
+    settings: AppSettings;
+    address: string;
+    scenarioDispatch: ScenarioItem[];
   }>()
 
   const speed = 25;
@@ -41,8 +43,10 @@
       displayedText.value = '';
       currentIndex.value = 0;
 
+      const deptName = props.settings.deptName ?? "Fire Dept";
+
       // Build our "plain english" description of this dispatch transmission.
-      dispatchTextFull.value = "Winsted Fire, respond to "+props.address+" ";
+      dispatchTextFull.value = deptName+", respond to "+props.address+" ";
       dispatchTextFull.value += "for the report of ";
 
       filteredScenarios.value.forEach((v, i) => {

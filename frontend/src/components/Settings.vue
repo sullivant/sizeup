@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { AppSettings } from '@/types/AppSettings';
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, nextTick } from 'vue';
 
 const props = defineProps<{
         settings: AppSettings,
@@ -114,7 +114,10 @@ const initMap = () => {
                     <label for="initialChosen">Initial Feature Count:</label>
                     <input id="initialChosen" type="text" v-model.number="props.settings.enabledDispatch" placeholder=props.settings.initialFeatures></input>
                 </div>
-
+                <div class="form-group">
+                    <label for="initialChosen">Department Name:</label>
+                    <input id="initialChosen" type="text" v-model="props.settings.deptName" placeholder=props.settings.deptName></input>
+                </div>
 
                 <div class="form-group">
                     <div @click="openModal">Set Bounding Box</div>
@@ -164,22 +167,14 @@ const initMap = () => {
         flex-shrink: 0;
         font-weight: lighter;
     }
-    
+
     .bounding-map {
-        height: 300px; 
+        height: 300px;
         width: 300px;
         border: 1px solid #ccc;
     }
 
 
-    .form-container {
-        max-width: 400px;
-        margin: 20px auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        background-color: #f9f9f9;
-    }
 
     .form-group {
         display: flex;
@@ -206,7 +201,7 @@ const initMap = () => {
         margin-left: 10px;
         width: 5ch;
     }
-    
+
     .button-container {
         width: 100%;
         display: flex;

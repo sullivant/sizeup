@@ -45,7 +45,7 @@
     </div>
     <div class="tab-content">
         <div class="tab-content" v-show="!props.onScene">
-            <DispatchView :address="chosenAddress" :scenarioDispatch="scenarioDispatch" @onScene="emit('onScene')"/>
+            <DispatchView :settings="settings" :address="chosenAddress" :scenarioDispatch="scenarioDispatch" @onScene="emit('onScene')"/>
         </div>
         <div class="tab-content" v-show="activeTab === 'street' && props.onScene">
             <StreetView
