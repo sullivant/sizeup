@@ -1,9 +1,7 @@
 <script setup lang="ts">
-    import { ref, computed, defineProps } from 'vue';
-
-    const emit = defineEmits<{
-      (e: 'update-on-scene', onScene: boolean): void
-    }>();
+  const emit = defineEmits<{
+    (e: 'update-on-scene', onScene: boolean): void
+  }>();
 
 
 </script>

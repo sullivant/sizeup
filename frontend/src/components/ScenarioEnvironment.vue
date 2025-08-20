@@ -1,5 +1,6 @@
+<!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <script setup lang="ts">
-    import { ref, computed, defineProps } from 'vue';
+    import { defineProps } from 'vue';
     import type { ScenarioEnvironment as typeScenarioEnvironment } from '@/types/typeScenarioEnvironment';
 
     const props = defineProps<{

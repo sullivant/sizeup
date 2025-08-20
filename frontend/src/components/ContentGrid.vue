@@ -101,6 +101,7 @@
                 :scenario-dispatch="itemsDispatched"
                 @locationChosen="handleLocationChosen"
                 @activeTab="handleActiveTab"
+                @on-scene="handleOnScene"
             />
 
         </div>

@@ -15,7 +15,7 @@
       scenarioDispatch: ScenarioItem[];
     }>();
 
-    const emit = defineEmits(['locationChosen', 'activeTab']);
+    const emit = defineEmits(['locationChosen', 'activeTab', 'onScene']);
 
     const activeTab = ref<'street' | 'map'>('street');
 
@@ -45,7 +45,7 @@
     </div>
     <div class="tab-content">
         <div class="tab-content" v-show="!props.onScene">
-            <DispatchView :address="chosenAddress" :scenarioDispatch="scenarioDispatch"/>
+            <DispatchView :address="chosenAddress" :scenarioDispatch="scenarioDispatch" @onScene="emit('onScene')"/>
         </div>
         <div class="tab-content" v-show="activeTab === 'street' && props.onScene">
             <StreetView
@@ -72,6 +72,7 @@
         border: 1px solid #ccc;
         border-bottom: none;
         background-color: var(--color-base-300);
+        border-radius: var(--radius-box);
         cursor: pointer;
         color: var(--color-base-content);
     }
