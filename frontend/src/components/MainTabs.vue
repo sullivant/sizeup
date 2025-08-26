@@ -17,7 +17,7 @@
       scenarioDispatch: ScenarioItem[];
     }>();
 
-    const emit = defineEmits(['locationChosen', 'onScene', 'update-settings']);
+    const emit = defineEmits(['locationChosen', 'onScene', 'update-settings', 'cancel-settings']);
 
     const activeTab = ref<'street' | 'map' | 'dispatch'>('street');
 
@@ -27,6 +27,10 @@
 
     function onUpdateSettings(payload: AppSettings) {
         emit('update-settings', payload);
+    }
+
+    function onCancelSettings() {
+      emit('cancel-settings');
     }
 
     function activateDispatch() {
@@ -51,10 +55,11 @@
       <button @click="activateDispatch()" :class="{ active: (!props.onScene || activeTab === 'dispatch') && !props.showSettings }">Dispatch</button>
       <button @click="activateStreet()" :class="{ active: activeTab === 'street'  && props.onScene && !props.showSettings }">Street View</button>
       <button @click="activateMap()" :class="{ active: activeTab === 'map'  && props.onScene && !props.showSettings }">Map View</button>
+      <button :class="{ active: props.showSettings}" v-show="props.showSettings">Settings</button>
     </div>
     <div class="tab-content">
         <div class="tab-content" v-show="props.showSettings">
-          <SettingsView :settings="props.settings" @update-settings="onUpdateSettings"/>
+          <SettingsView :settings="props.settings" @update-settings="onUpdateSettings" @cancel-settings="onCancelSettings"/>
         </div>
         <div class="tab-content" v-show="(!props.onScene || activeTab === 'dispatch')  && !props.showSettings">
           <DispatchView :settings="props.settings" :address="chosenAddress" :scenarioDispatch="scenarioDispatch" @onScene="emit('onScene')"/>

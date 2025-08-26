@@ -13,8 +13,12 @@ const handleSubmit = () => {
     emit('update-settings', localSettings.value);
 }
 
+const handleCancel = () => {
+  emit('cancel-settings');
+}
+
 const emit = defineEmits<{
-  (e: 'update-settings', newSettings: AppSettings): void
+  (e: 'update-settings', newSettings: AppSettings): void, (e: 'cancel-settings'): void
 }>();
 
 const showModal = ref(false);
@@ -144,8 +148,6 @@ watch(
 
 <template>
     <div class="settings-content">
-        <div class="settings-header"><font-awesome-icon :icon='"far fa-rectangle-list"'/> Settings</div>
-
         <div class="settings-form">
             <form @submit.prevent="handleSubmit">
                 <div class="form-group">
@@ -163,6 +165,7 @@ watch(
 
                 <div class="button-container">
                     <button type="submit">Update</button>
+                    <button type="button" @click="handleCancel">Cancel</button>
                 </div>
             </form>
         </div>
@@ -255,13 +258,9 @@ watch(
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        color: white;
-        background-color: var(--color-submit-button);
-    }
-
-    button[type="submit"] {
-        background-color: var(--color-submit-button);
         color: var(--color-base-content);
+        margin: 1px;
+        background-color: var(--color-submit-button);
     }
 
     .bounding-modal {

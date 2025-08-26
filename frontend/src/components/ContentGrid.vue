@@ -49,11 +49,14 @@
     }
 
     function onUpdateSettings(payload: AppSettings) {
-        emit('update-settings', payload);
+      emit('update-settings', payload);
     }
 
+    function onCancelSettings() {
+      emit('cancel-settings');
+    }
 
-    const emit = defineEmits(['update-settings']);
+    const emit = defineEmits(['update-settings', 'cancel-settings']);
 
     const props = defineProps<{
         scenarioDispatch: ScenarioItem[]
@@ -111,6 +114,7 @@
                 @locationChosen="handleLocationChosen"
                 @on-scene="handleOnScene"
                 @update-settings="onUpdateSettings"
+                @cancel-settings="onCancelSettings"
             />
 
         </div>

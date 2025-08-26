@@ -112,7 +112,7 @@
 <template>
     <div class="app-container">
         <Header :key="settingsVersion" @toggle-settings="toggleSettings"/>
-        <ContentGrid @update-settings="handleChangeToSettings" :show-settings="showingSettings" :settings="appSettings" :scenarioDispatch="scenarioDispatch" :scenario-on-scene="scenarioOnScene" :scenario-environment="scenarioEnvironment" :apparatus="apparatus" />
+        <ContentGrid @cancel-settings="toggleSettings" @update-settings="handleChangeToSettings" :show-settings="showingSettings" :settings="appSettings" :scenarioDispatch="scenarioDispatch" :scenario-on-scene="scenarioOnScene" :scenario-environment="scenarioEnvironment" :apparatus="apparatus" />
     </div>
 </template>
 
