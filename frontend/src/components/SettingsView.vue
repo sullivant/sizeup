@@ -150,7 +150,7 @@ watch(
             <form @submit.prevent="handleSubmit">
                 <div class="form-group">
                     <label for="initialChosen">Initial Feature Count:</label>
-                    <input id="initialChosen" type="text" v-model.number="enabledDispatch" placeholder=props.settings.initialFeatures>
+                    <input class="skinny" id="initialChosen" type="text" v-model.number="enabledDispatch" placeholder=props.settings.initialFeatures>
                 </div>
                 <div class="form-group">
                     <label for="initialChosen">Department Name:</label>
@@ -237,7 +237,9 @@ watch(
         border-radius: 4px;
         font-size: 14px;
         margin-left: 10px;
-        width: 5ch;
+    }
+    input.skinny {
+      width: 5ch;
     }
 
     .button-container {

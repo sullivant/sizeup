@@ -8,7 +8,6 @@
 
 <template>
     <div class="control-grid">
-        <div class="control-cell">Dispatch</div>
         <div class="control-cell" @click="emit('update-on-scene', true)">On Scene</div>
     </div>
 </template>

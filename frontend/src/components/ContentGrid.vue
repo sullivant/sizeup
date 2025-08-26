@@ -14,7 +14,7 @@
 
     const chosenAddress = ref('')
     const chosenLatLng = ref<{ lat: number; lng: number } | null>(null)
-    const streetViewActive = ref(true)
+    // const streetViewActive = ref(true)
     const onScene = ref(false)
     const itemsDispatched = ref<ScenarioItem[]>([])
     const itemsArrival = ref<ScenarioItem[]>([])
@@ -24,10 +24,10 @@
         chosenLatLng.value = { lat: payload.lat, lng: payload.lng }
     }
 
-    function handleActiveTab(payload: string) {
-        streetViewActive.value = (payload === 'street');
-        console.log("Streetview active:"+streetViewActive.value);
-    }
+    // function handleActiveTab(payload: string) {
+    //     streetViewActive.value = (payload === 'street');
+    //     console.log("Streetview active:"+streetViewActive.value);
+    // }
 
     function handleOnScene() {
         onScene.value = true
@@ -109,7 +109,6 @@
                 :on-scene="onScene"
                 :scenario-dispatch="itemsDispatched"
                 @locationChosen="handleLocationChosen"
-                @activeTab="handleActiveTab"
                 @on-scene="handleOnScene"
                 @update-settings="onUpdateSettings"
             />

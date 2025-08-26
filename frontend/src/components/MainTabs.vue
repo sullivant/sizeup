@@ -17,9 +17,9 @@
       scenarioDispatch: ScenarioItem[];
     }>();
 
-    const emit = defineEmits(['locationChosen', 'activeTab', 'onScene', 'update-settings']);
+    const emit = defineEmits(['locationChosen', 'onScene', 'update-settings']);
 
-    const activeTab = ref<'street' | 'map'>('street');
+    const activeTab = ref<'street' | 'map' | 'dispatch'>('street');
 
     function onLocationChosen(payload: { lat: number; lng: number; address: string }) {
         emit('locationChosen', payload);
@@ -29,16 +29,18 @@
         emit('update-settings', payload);
     }
 
+    function activateDispatch() {
+      activeTab.value = 'dispatch';
+    }
+
     function activateStreet() {
         console.log("Activating street");
         activeTab.value = 'street';
-        emit('activeTab', 'street');
     }
 
     function activateMap() {
         console.log("Activating map");
         activeTab.value = 'map';
-        emit('activeTab', 'map');
     }
 </script>
 
@@ -46,27 +48,28 @@
 <template>
   <div class="main-tabs">
     <div class="tab-buttons">
-      <button @click="activateStreet()" :class="{ active: activeTab === 'street' }">Street View</button>
-      <button @click="activateMap()" :class="{ active: activeTab === 'map' }">Map View</button>
+      <button @click="activateDispatch()" :class="{ active: (!props.onScene || activeTab === 'dispatch') && !props.showSettings }">Dispatch</button>
+      <button @click="activateStreet()" :class="{ active: activeTab === 'street'  && props.onScene && !props.showSettings }">Street View</button>
+      <button @click="activateMap()" :class="{ active: activeTab === 'map'  && props.onScene && !props.showSettings }">Map View</button>
     </div>
     <div class="tab-content">
         <div class="tab-content" v-show="props.showSettings">
           <SettingsView :settings="props.settings" @update-settings="onUpdateSettings"/>
         </div>
-        <div class="tab-content" v-show="!props.onScene && !props.showSettings">
-            <DispatchView :settings="props.settings" :address="chosenAddress" :scenarioDispatch="scenarioDispatch" @onScene="emit('onScene')"/>
+        <div class="tab-content" v-show="(!props.onScene || activeTab === 'dispatch')  && !props.showSettings">
+          <DispatchView :settings="props.settings" :address="chosenAddress" :scenarioDispatch="scenarioDispatch" @onScene="emit('onScene')"/>
         </div>
         <div class="tab-content" v-show="activeTab === 'street' && props.onScene && !props.showSettings">
-            <StreetView
-                :settings="props.settings"
-                @locationChosen="onLocationChosen"/>
+          <StreetView
+              :settings="props.settings"
+              @locationChosen="onLocationChosen"/>
         </div>
         <div class="tab-content" v-show="activeTab === 'map' && props.onScene && !props.showSettings">
-            <MapView
-                v-if="chosenLatLng"
-                :lat="chosenLatLng.lat"
-                :lng="chosenLatLng.lng"
-                :address="chosenAddress"/>
+          <MapView
+              v-if="chosenLatLng"
+              :lat="chosenLatLng.lat"
+              :lng="chosenLatLng.lng"
+              :address="chosenAddress"/>
       </div>
     </div>
   </div>
