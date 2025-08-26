@@ -48,12 +48,20 @@
         }))
     }
 
+    function onUpdateSettings(payload: AppSettings) {
+        emit('update-settings', payload);
+    }
+
+
+    const emit = defineEmits(['update-settings']);
+
     const props = defineProps<{
         scenarioDispatch: ScenarioItem[]
         scenarioOnScene: ScenarioItem[]
         scenarioEnvironment: typeScenarioEnvironment
         apparatus: Apparatus[]
         settings: AppSettings
+        showSettings: boolean
     }>();
 
     watch(
@@ -94,6 +102,7 @@
             </div>
 
             <MainTabs
+                :show-settings="showSettings"
                 :settings="props.settings"
                 :chosenLatLng="chosenLatLng"
                 :chosenAddress="chosenAddress"
@@ -102,6 +111,7 @@
                 @locationChosen="handleLocationChosen"
                 @activeTab="handleActiveTab"
                 @on-scene="handleOnScene"
+                @update-settings="onUpdateSettings"
             />
 
         </div>

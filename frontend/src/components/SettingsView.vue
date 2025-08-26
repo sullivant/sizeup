@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import type { AppSettings } from '@/types/AppSettings';
-import { ref, nextTick, onMounted, computed } from 'vue';
+import { ref, nextTick, onMounted, computed, watch } from 'vue';
 import appSettingsData from '@/data/appSettings.json'
 
 
 const props = defineProps<{
         settings: AppSettings,
-        settingsVersion: number,
 }>()
 
 const handleSubmit = () => {
+    console.log("SettingsView: Updating Settings");
     emit('update-settings', localSettings.value);
 }
 
@@ -130,6 +130,14 @@ onMounted(() => {
     localSettings.value = { ...props.settings };
   }
 });
+
+watch(
+  () => props.settings,
+      (newVal) => {
+          localSettings.value = newVal;
+      },
+      { immediate: true }
+);
 
 
 </script>

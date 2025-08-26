@@ -4,10 +4,12 @@
     import StreetView from '@/components/StreetView.vue';
     import MapView from '@/components/MapView.vue';
     import DispatchView from '@/components/DispatchView.vue';
+    import SettingsView from '@/components/SettingsView.vue';
     import type { AppSettings } from '@/types/AppSettings';
     import type { ScenarioItem } from '@/types/ScenarioItem';
 
     const props = defineProps<{
+      showSettings: boolean
       settings: AppSettings;
       chosenLatLng: { lat: number; lng: number } | null;
       chosenAddress: string;
@@ -15,12 +17,16 @@
       scenarioDispatch: ScenarioItem[];
     }>();
 
-    const emit = defineEmits(['locationChosen', 'activeTab', 'onScene']);
+    const emit = defineEmits(['locationChosen', 'activeTab', 'onScene', 'update-settings']);
 
     const activeTab = ref<'street' | 'map'>('street');
 
     function onLocationChosen(payload: { lat: number; lng: number; address: string }) {
         emit('locationChosen', payload);
+    }
+
+    function onUpdateSettings(payload: AppSettings) {
+        emit('update-settings', payload);
     }
 
     function activateStreet() {
@@ -44,15 +50,18 @@
       <button @click="activateMap()" :class="{ active: activeTab === 'map' }">Map View</button>
     </div>
     <div class="tab-content">
-        <div class="tab-content" v-show="!props.onScene">
-            <DispatchView :settings="settings" :address="chosenAddress" :scenarioDispatch="scenarioDispatch" @onScene="emit('onScene')"/>
+        <div class="tab-content" v-show="props.showSettings">
+          <SettingsView :settings="props.settings" @update-settings="onUpdateSettings"/>
         </div>
-        <div class="tab-content" v-show="activeTab === 'street' && props.onScene">
+        <div class="tab-content" v-show="!props.onScene && !props.showSettings">
+            <DispatchView :settings="props.settings" :address="chosenAddress" :scenarioDispatch="scenarioDispatch" @onScene="emit('onScene')"/>
+        </div>
+        <div class="tab-content" v-show="activeTab === 'street' && props.onScene && !props.showSettings">
             <StreetView
-                :settings="settings"
+                :settings="props.settings"
                 @locationChosen="onLocationChosen"/>
         </div>
-        <div class="tab-content" v-show="activeTab === 'map' && props.onScene">
+        <div class="tab-content" v-show="activeTab === 'map' && props.onScene && !props.showSettings">
             <MapView
                 v-if="chosenLatLng"
                 :lat="chosenLatLng.lat"

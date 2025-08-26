@@ -1,6 +1,4 @@
 <script setup lang="ts">
-    import type { AppSettings } from '@/types/AppSettings';
-    import { onMounted } from 'vue';
     import { appVersion } from '@/version';
 
 
@@ -22,7 +20,7 @@
     </div>
 
 
-    
+
 
 </template>
 

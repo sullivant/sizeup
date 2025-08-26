@@ -14,6 +14,12 @@
 
 
 
+    const showingSettings = ref(false);
+    const toggleSettings = () => {
+      showingSettings.value = !showingSettings.value;
+      console.log("Settings showing: "+showingSettings.value);
+    }
+
     const handleChangeToSettings = (settings: AppSettings) => {
         saveSettingsToSession(settings);
         window.location.reload();
@@ -28,7 +34,7 @@
 
     // Load the settings from the session storage, or if unable to, the defaults from the data.
     const loadSettingsFromSession = (): AppSettings => {
-        let prev = settingsVersion.value | 0;
+        const prev = settingsVersion.value | 0;
         const stored = sessionStorage.getItem('appSettings');
         const appStored = stored ? JSON.parse(stored) as AppSettings : appSettingsData;
         settingsVersion.value = prev + 1;
@@ -91,7 +97,7 @@
     }
 
     onMounted(() => {
-        let storedSettings = loadSettingsFromSession();
+        const storedSettings = loadSettingsFromSession();
         if (storedSettings) {
             appSettings.value = storedSettings;
         } else {
@@ -105,8 +111,8 @@
 
 <template>
     <div class="app-container">
-        <Header :key="settingsVersion" :settings="appSettings" @update-settings="handleChangeToSettings" :settings-version="settingsVersion"/>
-        <ContentGrid :settings="appSettings" :scenarioDispatch="scenarioDispatch" :scenario-on-scene="scenarioOnScene" :scenario-environment="scenarioEnvironment" :apparatus="apparatus" />
+        <Header :key="settingsVersion" @toggle-settings="toggleSettings"/>
+        <ContentGrid @update-settings="handleChangeToSettings" :show-settings="showingSettings" :settings="appSettings" :scenarioDispatch="scenarioDispatch" :scenario-on-scene="scenarioOnScene" :scenario-environment="scenarioEnvironment" :apparatus="apparatus" />
     </div>
 </template>
 

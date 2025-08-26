@@ -2,17 +2,7 @@
 import { ref, onMounted } from 'vue'
 import type { MenuItem } from '../types/MenuItem'
 
-import Settings from '@/components/SettingsView.vue'
-import type { AppSettings } from '@/types/AppSettings';
-
-import Info from '@/components/Info.vue';
-
-
-const props = defineProps<{
-        settings: AppSettings,
-        settingsVersion: number
-}>()
-
+import Info from '@/components/InfoView.vue';
 
 const isDark = ref(false) // Default is light mode.
 const toggleTheme = () => {
@@ -34,9 +24,10 @@ onMounted(() => {
 const displaySettings = ref(false);
 const displayInfo = ref(false);
 
-const showSettings = () => {
+const toggleSettings = () => {
     displayInfo.value = false;
-    displaySettings.value = !displaySettings.value;
+    console.log("Emitting toggle-settings");
+    emit('toggle-settings');
 }
 
 const showInfo = () => {
@@ -45,17 +36,12 @@ const showInfo = () => {
 }
 
 const menuItems: MenuItem[] = [
-    { label: 'Settings', icon: {type: "fas", name: "gears"} ,action: showSettings },
+    { label: 'Settings', icon: {type: "fas", name: "gears"} ,action: toggleSettings },
     { label: 'Info', icon: {type: "far", name: "circle-question"}, action: showInfo }
 ]
 
-function handleSettingsUpdate(newSettings: AppSettings) {
-    console.log("header emitting settings:"+newSettings.enabledDispatch);
-    emit('update-settings', newSettings);
-}
-
 const emit = defineEmits<{
-  (e: 'update-settings', newSettings: AppSettings): void
+  (e: 'toggle-settings'): void
 }>();
 </script>
 
@@ -77,10 +63,6 @@ const emit = defineEmits<{
         </nav>
         </div>
     </header>
-
-    <div v-show="displaySettings" class="settings-modal">
-        <Settings :settings="props.settings" @update-settings="handleSettingsUpdate" :settings-version="props.settingsVersion" />
-    </div>
 
     <div v-show="displayInfo" class="info-modal">
         <Info @close-info="showInfo()" />
@@ -131,16 +113,23 @@ const emit = defineEmits<{
     }
 
     .settings-modal, .info-modal {
-        height: auto;
         width: auto;
+
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 9999;
+        z-index: 9900;
         background: var(--color-base-200);
-        padding: 20px;
-        border-radius: 10px;
+        margin: 2px;
+
+        overflow: auto;
+        background-color: var(--color-base-100);
+        border: var(--border) solid #ccc;
+        border-radius: var(--radius-box);
+
+
+
     }
 
 
