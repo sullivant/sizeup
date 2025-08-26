@@ -89,7 +89,6 @@ import type { AppSettings } from '@/types/AppSettings';
     border: 1px solid #ccc;
     color: var(--color-base-content);
     padding: 1em;
-    border-radius: var(--radius-box);
     font-size: 1.2em;
     width: 100%;
   }
@@ -116,7 +115,6 @@ import type { AppSettings } from '@/types/AppSettings';
     align-items: center;
     padding: 1rem;
     border: 1px solid #ccc;
-    border-radius: 8px;
     background: var(--color-base-100);
     cursor: grab;
     color: var(--color-primary-content);

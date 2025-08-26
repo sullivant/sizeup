@@ -84,7 +84,6 @@
         border: 1px solid #ccc;
         border-bottom: none;
         background-color: var(--color-base-300);
-        border-radius: var(--radius-box);
         cursor: pointer;
         color: var(--color-base-content);
     }

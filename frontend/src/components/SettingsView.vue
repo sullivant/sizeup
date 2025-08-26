@@ -179,10 +179,11 @@ watch(
 </template>
 
 <style scoped>
+
     .settings-header {
         padding: 0.5rem 1rem;
         font-weight: bold;
-        border-bottom: 1px solid #6f5656;
+        border: 1px solid #ccc;
         background-color: var(--color-base-300);
         color: var(--color-base-content);
         flex-shrink: 0;
