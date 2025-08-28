@@ -2,7 +2,6 @@
   import { ref, computed, watch } from 'vue';
   import type { ScenarioItem } from '@/types/ScenarioItem';
   import type { AppSettings } from '@/types/AppSettings';
-  import PromptView from '@/components/PromptView.vue';
 
   const emit = defineEmits(['onScene']);
 
@@ -79,7 +78,6 @@
       <div class="control-cell" @click="emit('onScene', true)">On Scene</div>
   </div>
 
-  <PromptView :dispatch-text="dispatchTextFull"/>
 
 </template>
 
