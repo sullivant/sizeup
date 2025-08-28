@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import { ref, computed, watch } from 'vue';
   import type { ScenarioItem } from '@/types/ScenarioItem';
-import type { AppSettings } from '@/types/AppSettings';
+  import type { AppSettings } from '@/types/AppSettings';
+  import PromptView from '@/components/PromptView.vue';
 
   const emit = defineEmits(['onScene']);
 
@@ -58,7 +59,7 @@ import type { AppSettings } from '@/types/AppSettings';
 
 
       if (autoStart) startTyping();
-    }, 1000);
+    }, 2000);
   });
 
   const filteredScenarios = computed(() =>
@@ -77,6 +78,8 @@ import type { AppSettings } from '@/types/AppSettings';
   <div class="control-grid">
       <div class="control-cell" @click="emit('onScene', true)">On Scene</div>
   </div>
+
+  <PromptView :dispatch-text="dispatchTextFull"/>
 
 </template>
 

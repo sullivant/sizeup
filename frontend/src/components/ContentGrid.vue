@@ -116,7 +116,6 @@
                 @update-settings="onUpdateSettings"
                 @cancel-settings="onCancelSettings"
             />
-
         </div>
         <div class="right-column">
             <div class="right-row">

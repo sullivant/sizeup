@@ -1,6 +1,6 @@
 <script setup lang="ts">
-    import { ref, computed, defineProps } from 'vue';
-    
+    import { computed, defineProps } from 'vue';
+
     import type { ScenarioItem } from '@/types/ScenarioItem'
 
     const props = defineProps<{
@@ -12,7 +12,7 @@
     //     [...props.scenarioToggles].sort((a,b) => Number(b.enabled) - Number(a.enabled))
     // )
 
-    const filteredScenarios = computed(() => 
+    const filteredScenarios = computed(() =>
         [...props.scenarioToggles].filter((s) => s.enabled)
     )
 
@@ -30,7 +30,7 @@
             {{ item.shortName }}
         </div>
     </div>
-<!-- 
+<!--
     <ul>
         <li v-for="item in sortedScenarioToggles" :key="item.id" @click="toggleScenario(item.id)">
             <font-awesome-icon :icon="item.enabled ? 'fa-regular fa-square-check' : 'fa-regular fa-square'"  /> {{ item.name }}
